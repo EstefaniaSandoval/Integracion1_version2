@@ -78,6 +78,10 @@ $ocupados = $total_spaces - $libres;
 
 <!-- Resumen de espacios en cuadros -->
 <h2>Resumen de Espacios</h2>
+<p>Total de espacios: <?= $total_spaces; ?></p>
+<p>Espacios libres: <?= $libres; ?></p>
+<p>Espacios ocupados: <?= $ocupados; ?></p>
+
 <div class="resumen-grid">
     <div class="resumen-box total">
         Total: <?= $total_spaces; ?>
