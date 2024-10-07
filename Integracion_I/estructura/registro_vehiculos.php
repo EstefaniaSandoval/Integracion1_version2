@@ -9,8 +9,11 @@ ini_set('display_errors', 1);
 
 <h2>Registro de Vehículos</h2>
 <form action="registro_vehiculos.php" method="POST">
-    <label for="owner_name">Nombre del Propietario:</label><br>
-    <input type="text" id="owner_name" name="owner_name" required><br><br>
+    <label for="owner_name">Hora de Entrada:</label><br>
+    <input type="date" id="owner_name" name="owner_name" required><br><br>
+
+    <label for="owner_name">Hora de Salida:</label><br>
+    <input type="date" id="owner_name" name="owner_name" required><br><br>
 
     <label for="vehicle_plate">Patente del Vehículo:</label><br>
     <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>

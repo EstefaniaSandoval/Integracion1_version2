@@ -121,7 +121,7 @@ $ocupados = $total_spaces - $libres;
 
 <h2>Acciones</h2>
 <div class="acciones">
-    <a href="registro_vehiculos.php" class="btn">Registrar Vehículo</a>
+    <a href="registo_vehiculos" class="btn">Registrar Vehículo</a>
     <a href="gestion_espacios.php" class="btn">Gestionar Espacios</a>
 </div>
 

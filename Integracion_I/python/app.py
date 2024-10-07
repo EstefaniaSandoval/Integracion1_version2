@@ -17,6 +17,10 @@ vehicles = []
 def index():
     return render_template('index.html', spaces=parking_spaces, vehicles=vehicles)
 
+@app.route('/register.html', methods=['GET'])
+def register():   
+    return render_template('register.html')
+
 @app.route('/add_space.html', methods=['GET', 'POST'])
 def add_space():
     if request.method == 'POST':

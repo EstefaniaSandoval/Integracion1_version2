@@ -5,6 +5,9 @@
     <label for="space_id">ID del Espacio de Estacionamiento:</label><br>
     <input type="text" id="space_id" name="space_id" required><br><br>
 
+    <label for="space_id">Ubicacion:</label><br>
+    <input type="text" id="space_id" name="space_id" required><br><br>
+
     <label for="state">Estado:</label><br>
     <select id="state" name="state">
         <option value="Libre">Libre</option>
@@ -13,6 +16,9 @@
 
     <label for="disabled">Espacio para Discapacitados:</label>
     <input type="checkbox" id="disabled" name="disabled"><br><br>
+
+    <label for="space_id">Patente:</label><br>
+    <input type="text" id="space_id" name="space_id" required><br><br>
 
     <input type="submit" value="Añadir Espacio">
 </form>
