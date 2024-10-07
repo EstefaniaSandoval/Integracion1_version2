@@ -1,0 +1,216 @@
+/* Sección de introducción */
+.intro {
+    margin-top: 120px; /* Agrega un margen superior de 120px. */
+    padding: 40px; /* Agrega un padding de 40px alrededor del contenido. */
+}
+
+.intro h3 {
+    font-size: 32px; 
+    margin-bottom: 20px; /* Margen inferior de 20px debajo del título. */
+    color: #fff; /* Color blanco para los títulos. */
+}
+
+.intro p {
+    font-size: 18px; 
+    color: #fff; /* Color blanco para los párrafos. */
+}
+
+.cta {
+    display: inline-block; /* Hace que el botón de llamada a la acción sea un bloque en línea. */
+    margin-top: 20px; /* Margen superior de 20px. */
+    background-color: #ff6600; 
+    color: white; 
+    padding: 10px 20px; /* Padding de 10px arriba/abajo y 20px a los lados. */
+    font-size: 18px; /* Tamaño de fuente de 18px. */
+    border-radius: 30px; /* Bordes redondeados de 30px. */
+    text-decoration: none; /* Elimina subrayados en el enlace del botón. */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo. */
+}
+
+.cta:hover {
+    background-color: #e65c00; /* Cambia el color del botón cuando se pasa el cursor. */
+}
+
+/* Estilo para el modal */
+.modal {
+    display: none; /* El modal no se muestra por defecto. */
+    position: fixed; /* Fija el modal en la ventana del navegador. */
+    z-index: 1001; /* Asegura que el modal esté sobre otros elementos. */
+    left: 0; /* Ubica el modal al lado izquierdo. */
+    top: 0; /* Ubica el modal en la parte superior. */
+    width: 100%; /* Hace que el modal ocupe todo el ancho de la pantalla. */
+    height: 100%; /* Hace que el modal ocupe toda la altura de la pantalla. */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente negro. */
+    justify-content: center; /* Centra horizontalmente el contenido del modal. */
+    align-items: center; /* Centra verticalmente el contenido del modal. */
+}
+
+/* Estilo del contenido del modal */
+.modal-content {
+    background-color: #fff; /* Fondo blanco para el contenido del modal. */
+    margin: auto; /* Centra el modal horizontalmente. */
+    padding: 30px; /* Padding interno de 30px alrededor del contenido. */
+    border-radius: 10px; /* Bordes redondeados de 10px. */
+    width: 80%; /* Ancho del 80% de la pantalla. */
+    max-width: 400px; /* Máximo ancho del modal de 400px. */
+}
+
+/* Estilo del botón de cierre del modal */
+.close {
+    color: #999; /* Color gris para el botón de cierre. */
+    float: right; /* Ubica el botón de cierre a la derecha. */
+    font-size: 24px; /* Tamaño de fuente de 24px para el icono de cierre. */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima. */
+}
+
+.close:hover {
+    color: #000; /* Cambia a negro el color del botón de cierre al pasar el cursor. */
+}
+
+/* Estilo del contenido del modal (títulos, etiquetas e inputs) */
+.modal-content h2 {
+    font-size: 24px; /* Tamaño de fuente de 24px para los títulos del modal. */
+    margin-bottom: 20px; /* Margen inferior de 20px debajo del título. */
+}
+
+.modal-content label {
+    display: block; /* Muestra las etiquetas como bloques, ocupando toda la línea. */
+    margin-bottom: 8px; /* Margen inferior de 8px debajo de la etiqueta. */
+    font-size: 16px; /* Tamaño de fuente de 16px. */
+    color: #333; /* Color gris oscuro para las etiquetas. */
+}
+
+.modal-content input {
+    width: 100%; /* El input ocupa el 100% del ancho disponible. */
+    padding: 10px; /* Padding de 10px dentro del input. */
+    margin-bottom: 20px; /* Margen inferior de 20px debajo del input. */
+    border: 1px solid #ccc; /* Borde gris claro alrededor del input. */
+    border-radius: 5px; /* Bordes redondeados de 5px en el input. */
+}
+
+.modal-content button {
+    width: 100%; /* El botón ocupa el 100% del ancho disponible. */
+    background-color: #0066cc; /* Fondo azul para el botón. */
+    color: white; /* Texto blanco en el botón. */
+    padding: 12px; /* Padding de 12px dentro del botón. */
+    border: none; /* Elimina el borde del botón. */
+    font-size: 16px; /* Tamaño de fuente de 16px. */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar por encima. */
+    border-radius: 5px; /* Bordes redondeados de 5px. */
+}
+
+.modal-content button:hover {
+    background-color: #005bb5; /* Cambia el color de fondo del botón al pasar el cursor. */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+
+nav ul li a {
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-buttons button {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.auth-buttons button:hover {
+    background-color: #005bb5;
+}
+
+/* Menú desplegable */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.acciones {
+    display: flex;               /* Usar flexbox */
+    justify-content: center;     /* Centrar los botones */
+    gap: 10px;                  /* Espaciado entre los botones */
+    margin-top: 20px;           /* Espaciado superior */
+}
+
+.btn {
+    padding: 10px;
+    background-color: burlywood;
+    color: black;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: darkgrey;
+}
+
+.btn:active {
+    background-color: antiquewhite;
+}
