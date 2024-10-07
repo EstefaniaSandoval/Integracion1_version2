@@ -9,14 +9,17 @@ ini_set('display_errors', 1);
 
 <h2>Registro de Vehículos</h2>
 <form action="registro_vehiculos.php" method="POST">
-    <label for="owner_name">Hora de Entrada:</label><br>
-    <input type="date" id="owner_name" name="owner_name" required><br><br>
+    <label for="owner_name">Nombre del propietario:</label><br>
+    <input type="text" id="owner_name" name="owner_name" required><br><br>
 
-    <label for="owner_name">Hora de Salida:</label><br>
-    <input type="date" id="owner_name" name="owner_name" required><br><br>
+    <label for="owner_name">Apellido del propietario:</label><br>
+    <input type="text" id="owner_name" name="owner_name" required><br><br>
 
-    <label for="vehicle_plate">Patente del Vehículo:</label><br>
-    <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
+    <label for="owner_name">Edad del Propietario:</label><br>
+    <input type="text" id="owner_name" name="owner_name" required><br><br>
+
+    <label for="owner_name">Sexo:</label><br>
+    <input type="text" id="owner_name" name="owner_name" required><br><br>
 
     <label for="user_type">Tipo de Usuario:</label><br>
     <select id="user_type" name="user_type" required>
@@ -24,6 +27,18 @@ ini_set('display_errors', 1);
         <option value="alumno">Alumno</option>
         <option value="visita">Visita</option>
     </select><br><br>
+
+    <label for="vehicle_plate">Patente del Vehículo:</label><br>
+    <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
+
+    <label for="vehicle_plate">Marca del Vehículo:</label><br>
+    <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
+
+    <label for="vehicle_plate">Modelo del Vehículo:</label><br>
+    <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
+
+    <label for="vehicle_plate">Color del Vehículo:</label><br>
+    <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
 
     <label for="parking_space">Espacio de Estacionamiento:</label><br>
     <input type="text" id="parking_space" name="parking_space" required><br><br>
