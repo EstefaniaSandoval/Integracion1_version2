@@ -59,3 +59,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <?php include('pie.php'); ?>
+
+
+
+
+
+<?php
+
+/*
+// CONSULTA PREPARADA PARA INGRESAR UN VEHICULO
+
+
+include('conex.php');
+
+$propietario = $_POST['owner_name'];
+$patente = $_POST['vehicle_plate'];
+$tipoUser = $_POST['user_type']
+$espacio_id = $_POST['parking_space'];
+$entrada = date('Y-m-d H:i:s'); 
+
+
+
+$sql = "INSERT INTO pruebaINTEGRA (propietario, patente, espacio_id, tipoUser, entrada) 
+        VALUES ('$propietario', '$patente', '$espacio_id' , '$tipoUser' , '$entrada')";
+
+
+$consulta = mysqli_query($conexion, $sql);
+
+if ($consulta) {
+    echo "Ingreso Exitoso: 
+    <br> Propietario: $propietario
+    <br> patente: $patente
+    <br> espacio_id: $espacio_id
+    <br> entrada: $entrada<br><br>";
+} else {
+    echo "Error al guardar los datos: " . $conexion->error;
+}
+
+
+$conexion->close();
+?>
+
+*/
