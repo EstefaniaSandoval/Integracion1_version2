@@ -1,7 +1,8 @@
 <?php include('cabecera.php'); ?>
 <!-- Cuando esté listo para conectar la base de datos, solo se necesitará reemplazar los arrays simulados por las consultas SQL. -->
 <h1>Gestión de Estacionamiento</h1>
-
+<link rel="stylesheet" href="styles.css">
+<!-- Simulando datos de espacios de estacionamiento -->
 <?php
 $parking_spaces = [
     'A1' => ['estado' => 'Libre', 'discapacitado' => false],
@@ -119,7 +120,9 @@ $ocupados = $total_spaces - $libres;
 
 
 <h2>Acciones</h2>
-<a href="registro_vehiculos.php" class="btn">Registrar Vehículo</a>
-<a href="gestion_espacios.php" class="btn">Gestionar Espacios</a>
+<div class="acciones">
+    <a href="registro_vehiculos.php" class="btn">Registrar Vehículo</a>
+    <a href="gestion_espacios.php" class="btn">Gestionar Espacios</a>
+</div>
 
 <?php include('pie.php'); ?>

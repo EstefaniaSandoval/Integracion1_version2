@@ -4,35 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Estacionamiento</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { background-color: #333; padding: 10px 0; }
-        nav { display: flex; justify-content: center; }
-        nav ul { list-style: none; padding: 0; margin: 0; }
-        nav ul li { display: inline; }
-        nav ul li a { color: white; padding: 10px 20px; text-decoration: none; display: inline-block; }
-        nav ul li a:hover { background-color: #555; }
-
-        /* Menú desplegable */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content { 
-            display: none; 
-            position: absolute; 
-            background-color: #f9f9f9; 
-            min-width: 160px; 
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
-            z-index: 1; 
-        }
-        .dropdown-content a {
-            color: black; 
-            padding: 12px 16px; 
-            text-decoration: none; 
-            display: block;
-        }
-        .dropdown-content a:hover { background-color: #f1f1f1; }
-        .dropdown:hover .dropdown-content { display: block; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -45,8 +17,45 @@
                         <a href="registro_vehiculos.php">Registro de Vehículos</a>
                         <a href="gestion_espacios.php">Gestión de Espacios</a>
                         <a href="informe_ocupacion.php">Informe de Ocupación</a>
+                        <a href="cambio_de_turno">Cambio de Turno</a>
                     </div>
                 </li>
             </ul>
         </nav>
+        <div class="auth-buttons">
+            <button id="loginBtn">Iniciar Sesión</button> 
+            <button id="registerBtn">Registrarse</button> 
+        </div>
     </header>
+    <div id="loginModal" class="modal"> <!-- Modal oculto para iniciar sesión, aparecerá cuando se haga clic en el botón correspondiente. -->
+        <div class="modal-content">
+            <span class="close">&times;</span> <!-- Botón para cerrar el modal, representado por una 'X'. -->
+            <h2>Iniciar Sesión</h2> <!-- Título del modal de inicio de sesión. -->
+            <form id="loginForm"> <!-- Formulario de inicio de sesión. -->
+                <label for="loginEmail">Email:</label> <!-- Etiqueta para el campo del email. -->
+                <input type="email" id="loginEmail" required> <!-- Campo de entrada de email, es obligatorio. -->
+                <label for="loginPassword">Contraseña:</label> <!-- Etiqueta para el campo de contraseña. -->
+                <input type="password" id="loginPassword" required> <!-- Campo de entrada de contraseña, es obligatorio. -->
+                <button type="submit">Iniciar Sesión</button> <!-- Botón para enviar el formulario de inicio de sesión. -->
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal"> 
+        <div class="modal-content">
+            <span class="close">&times;</span> <!-- Botón para cerrar el modal, representado por una 'X'. -->
+            <h2>Registrarse</h2> 
+            <form id="registerForm"> 
+                <label for="registerEmail">Email:</label> <!-- Etiqueta para el campo del email. -->
+                <input type="email" id="registerEmail" required> <!-- Campo de entrada de email, es obligatorio. -->
+                <label for="registerPassword">Contraseña:</label> <!-- Etiqueta para el campo de contraseña. -->
+                <input type="password" id="registerPassword" required> <!-- Campo de entrada de contraseña, es obligatorio. -->
+                <label for="registerConfirmPassword">Confirmar Contraseña:</label> <!-- Etiqueta para confirmar la contraseña. -->
+                <input type="password" id="registerConfirmPassword" required> <!-- Campo de entrada para confirmar la contraseña, es obligatorio. -->
+                <button type="submit">Registrarse</button> 
+            </form>
+        </div>
+    </div>
+
+    <script src="Inicio-Register.js"></script>
+</body>
