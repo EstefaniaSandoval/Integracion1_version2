@@ -57,13 +57,21 @@
     <div class="modal-content">
         <span class="close" id="closeLogin">&times;</span>
         <h2>Iniciar Sesión</h2>
-        <form>
-            <label for="loginEmail">Email:</label>
-            <input type="email" id="loginEmail" required>
-            <label for="loginPassword">Contraseña:</label>
-            <input type="password" id="loginPassword" required>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
+
+
+
+        
+<!-- Formulario de Iniciar Sesión dentro del modal -->
+<form action="login.php" method="POST">
+    <label for="loginEmail">Email:</label>
+    <input type="email" id="loginEmail" name="email" required>
+    
+    <label for="loginPassword">Contraseña:</label>
+    <input type="password" id="loginPassword" name="password" required>
+    
+    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+</form>
+
     </div>
 </div>
 
