@@ -1,0 +1,100 @@
+/* Estilo para todo el body */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+}
+
+/* Header con fondo azul celeste */
+header#img-uct {
+    background-color: #005eff; /* Azul celeste */
+    padding: 20px 0; /* Padding superior e inferior de 20px */
+    text-align: center; /* Centrar la imagen en el header */
+}
+
+/* General container styling */
+.conteiner {
+    background-color: white;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto; /* Añadido margen superior para separar el contenido del header */
+    text-align: left;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.conteiner label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.conteiner form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conteiner input[type="text"],
+.conteiner input[type="email"],
+.conteiner input[type="password"],
+.conteiner input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.conteiner input[type="text"]:focus,
+.conteiner input[type="email"]:focus,
+.conteiner input[type="password"]:focus,
+.conteiner input[type="file"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.conteiner input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.conteiner input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.conteiner p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+.futer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+}
