@@ -19,7 +19,7 @@
     </select><br><br>
 
     <!-- Espacio para discapacitados -->
-    <label for="disabled">Espacio para Discapacitados:</label>
+    <label for="disabled">Preferencial:</label>
     <input type="checkbox" id="disabled" name="disabled"><br><br>
 
     <input type="submit" value="Añadir Espacio">
@@ -41,20 +41,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $state = $_POST['state'];
     $disabled = isset($_POST['disabled']) ? true : false;
 
-    // Verifica si el espacio no existe ya
-    if (!isset($parking_spaces[$space_id])) {
-        // Agregar el nuevo espacio
-        $parking_spaces[$space_id] = [
-            'estado' => $state,
-            'discapacitado' => $disabled,
-            'ubicacion' => $location
-        ];
+    // Comprobar si el espacio ya existe
+    $check_sql = "SELECT * FROM Estacionamiento WHERE IdEstacionamiento = '$space_id'";
+    $result = $conn->query($check_sql);
 
-        echo "<p style='color:green;'>Espacio de estacionamiento añadido exitosamente.</p>";
-    } else {
+    if ($result->num_rows > 0) {
         echo "<p style='color:red;'>Error: El ID del espacio ya existe.</p>";
+    } else {
+        // Convertir el estado y el campo preferencial a valores adecuados
+        $availability = $state === 'Libre' ? 1 : 0; // 1 para Libre, 0 para Ocupado
+        $preferential = $disabled ? 1 : 0; // 1 para sí, 0 para no
+
+        // Preparar la consulta SQL para insertar los datos
+        $sql = "INSERT INTO Estacionamiento (IdEstacionamiento, ubicacion, preferenciales, disponibilidad) 
+            VALUES ('$space_id', '$location', '$preferential', '$availability')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "<p style='color:green;'>Espacio de estacionamiento añadido exitosamente.</p>";
+        } else {
+            echo "<p style='color:red;'>Error: " . $sql . "<br>" . $conn->error . "</p>";
+        }
     }
 }
+
+// Cerrar la conexión
+$conn->close();
 ?>
 
 <?php include('pie.php'); ?>
