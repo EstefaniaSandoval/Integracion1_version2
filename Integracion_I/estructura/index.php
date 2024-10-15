@@ -86,6 +86,29 @@ $ocupados = $total_spaces - $libres;
     .btn:hover {
         background-color: #0056b3;
     }
+
+    .main-footer {
+    padding: 60px 0; /* Espaciado superior e inferior */
+    text-align: center;
+    width: 100%; /* Ocupa todo el ancho */
+    position: relative; /* Mantener el footer fijo en la parte inferior */
+    bottom: 0;
+    }
+
+    .footer-content {
+        max-width: 1000px; /* Ancho más reducido para el contenido */
+        margin: 0 auto; /* Centra el contenido del footer */
+        padding: 0 20px; /* Agrega padding lateral */
+        display: flex; /* Utilizar Flexbox */
+        justify-content: space-between; /* Distribuir el contenido en una sola línea */
+        align-items: center; /* Alinear verticalmente */
+    }
+
+    .main-footer p {
+        margin: 0;
+        padding: 0;
+    }
+
 </style>
 
 <!-- Resumen de espacios en cuadros -->
@@ -131,5 +154,14 @@ $ocupados = $total_spaces - $libres;
     <a href="registro_vehiculos.php" class="btn">Registrar Vehículo</a>
     <a href="gestion_espacios.php" class="btn">Gestionar Espacios</a>
 </div>
+<footer class="main-footer">
+    <div class="footer-content">
+        <p>&copy; 2024 Universidad Católica de Temuco. Todos los derechos reservados.</p>
+        <p>
+            <a href="https://www.uct.cl" target="_blank">Página oficial UCT</a> | 
+            <a href="mailto:contacto@uct.cl">Contáctanos Aquí</a>
+        </p>
+    </div>
+</footer>
 
 <?php include('pie.php'); ?>

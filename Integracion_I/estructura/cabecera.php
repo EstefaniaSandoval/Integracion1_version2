@@ -85,6 +85,8 @@
             <input type="email" id="registerEmail" required>
             <label for="registerPassword">Contraseña:</label>
             <input type="password" id="registerPassword" required>
+            <a href="registro.php" class="register-link">¿Eres Funcionario o Alumno de la UCT? Presiona Aquí</a>
+            
             <button type="submit">Registrarse</button>
         </form>
     </div>
