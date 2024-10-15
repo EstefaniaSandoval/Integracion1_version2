@@ -12,7 +12,7 @@
     <input type="text" id="location" name="location" required><br><br>
 
     <!-- Estado -->
-    <label for="state">Estado:</label><br>
+    <label for="state">Disponibilidad:</label><br>
     <select id="state" name="state" required>
         <option value="Libre">Libre</option>
         <option value="Ocupado">Ocupado</option>
@@ -25,7 +25,7 @@
     <input type="submit" value="Añadir Espacio">
 </form>
 
-
+<?php
 
 // Simulando la existencia del array de espacios de estacionamiento
 $parking_spaces = [
@@ -34,17 +34,18 @@ $parking_spaces = [
     'B1' => ['estado' => 'Libre', 'discapacitado' => true],
     'B2' => ['estado' => 'Ocupado', 'discapacitado' => false]
 ];
-<?php
+
+
 include('conex.php'); // Conexión con la base de datos
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $space_id = $_POST['space_id'];
-    $location = $_POST['location'];
-    $state = ($_POST['state'] === 'Ocupado') ? 1 : 0;
-    $disabled = isset($_POST['disabled']) ? 1 : 0;
+    $id_estac = $_POST['space_id'];
+    $ubicacion = $_POST['location'];
+    $disponibilidad = $_POST['state'];
+    $preferencial = isset($_POST['disabled']) ? 1 : 0; // 1 si está marcada la casilla, 0 si no
 
     // Comprobar si el espacio ya existe
-    $check_sql = "SELECT IdEstacionamiento FROM Estacionamientos1 WHERE IdEstacionamiento = ?";
+    $check_sql = "SELECT IdEstacionamiento FROM Estacionamientos WHERE IdEstacionamiento = ?";
     $stmt_check = $conexion->prepare($check_sql);
 
     if (!$stmt_check) {
@@ -52,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Enlazar el parámetro para la verificación 
-    $stmt_check->bind_param("s", $space_id);
+    $stmt_check->bind_param("s", $id_estac);
 
     // Ejecutar la consulta de verificación
     $stmt_check->execute();
@@ -60,12 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener el resultado de la consulta
     $stmt_check->store_result();
     if ($stmt_check->num_rows > 0) {
-        echo "El espacio de estacionamiento con ID $space_id ya existe.";
+        echo "El espacio de estacionamiento con ID $id_estac ya existe.";
     } else {
         // Si el espacio no existe, proceder con la inserción
-        $sql_insert = "INSERT INTO Estacionamientos1 (IdEstacionamiento, ubicacion, preferenciales, disponibilidad) 
-                    VALUES (?, ?, ?, ?)";
-
+        $sql_insert = "INSERT INTO Estacionamientos (IdEstacionamiento, ubicacion, disponibilidad, preferencial) 
+                       VALUES (?, ?, ?, ?)";
+        
         // Preparar la consulta de inserción
         $stmt_insert = $conexion->prepare($sql_insert);
 
@@ -73,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Error al preparar la consulta de inserción: " . $conexion->error);
         }
 
-        $stmt_insert->bind_param("ssii", $space_id, $location, $state, $disabled);
+        // Aquí aseguramos que bind_param use "sssi"
+        $stmt_insert->bind_param("sssi", $id_estac, $ubicacion, $disponibilidad, $preferencial);
 
         if ($stmt_insert->execute()) {
             echo "Datos insertados correctamente.";
