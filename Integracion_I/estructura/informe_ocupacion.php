@@ -1,4 +1,54 @@
-<?php include('cabecera.php'); ?>
+<?php 
+session_start();
+include('conex.php'); // Conexión a la base de datos
+include('cabecera.php'); // Encabezado HTML
+
+// Datos de ejemplo para simular la disponibilidad de los estacionamientos
+$parking_spaces = [
+    'A1' => 'Libre',
+    'A2' => 'Ocupado',
+    'B1' => 'Libre',
+    'B2' => 'Ocupado'
+];
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Ocupación</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Estilo para la tabla -->
+</head>
+<body>
+
 <h2>Informe de Ocupación</h2>
-<p>Aquí se podría agregar un informe de ocupación del estacionamiento..</p>
-<?php include('pie.php'); ?>
+
+<table>
+    <thead>
+        <tr>
+            <th>Número de Espacio</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($parking_spaces as $space => $status): ?>
+            <tr>
+                <td><?php echo $space; ?></td>
+                <td>
+                    <?php if ($status === 'Libre'): ?>
+                        <span style="color: green;">Disponible</span>
+                    <?php else: ?>
+                        <span style="color: red;">Ocupado</span>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php include('pie.php'); // Pie de página ?>
+
+</body>
+</html>
+
