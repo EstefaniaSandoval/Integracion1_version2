@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de estudiantes</title>
+    <title>Registro</title>
     <link rel="stylesheet" href="registro.css">
 </head>
 <body>
@@ -17,8 +17,9 @@
             <label for="username">Nombre de usuario</label>
             <input type="text" id="username" name="username" required>
 
-            <label for=""></label>
-            
+            <label for="carrera">Carrera</label>
+            <input type="text" id="carrera" name="carrera" require>
+
             <label for="email">Correo institucional</label>
             <input type="email" id="email" name="email" required>
             
@@ -31,7 +32,7 @@
             <input type="submit" value="Registrarse">
         </form>
 
-        <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a>.</p>
+        <p>¿Ya tienes una cuenta? <a href="inicio.php">Inicia sesión aquí</a>.</p>
     </main>
     <footer class="futer">
         <p>&copy; 2024 Universidad Católica de Temuco. Todos los derechos reservados en su Totalidad.</p>

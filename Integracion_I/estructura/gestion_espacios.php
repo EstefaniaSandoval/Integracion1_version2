@@ -1,5 +1,6 @@
 <?php include('cabecera.php'); ?>
 
+<link rel="stylesheet" href="styles.css">
 <h2>Gestión de Espacios</h2>
 
 <form action="gestion_espacios.php" method="POST">

@@ -32,7 +32,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Inicio</a>
+                        <a class="nav-link" href="pag_inicio.php">Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="opcionesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,50 +47,5 @@
                     </li>
                 </ul>
             </div>
-            <div class="ml-auto">
-                <button class="btn btn-outline-light" id="loginBtn">Iniciar Sesión</button>
-                <button class="btn btn-light" id="registerBtn">Registrarse</button>
-            </div>
         </nav>
     </header>
-<!-- Modal de Iniciar Sesión -->
-<div class="modal" id="loginModal">
-    <div class="modal-content">
-        <span class="close" id="closeLogin">&times;</span>
-        <h2>Iniciar Sesión</h2>
-
-
-
-        
-<!-- Formulario de Iniciar Sesión dentro del modal -->
-<form action="login.php" method="POST">
-    <label for="loginEmail">Email:</label>
-    <input type="email" id="loginEmail" name="email" required>
-    
-    <label for="loginPassword">Contraseña:</label>
-    <input type="password" id="loginPassword" name="password" required>
-    
-    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-</form>
-
-    </div>
-</div>
-
-<!-- Modal de Registro -->
-<div class="modal" id="registerModal">
-    <div class="modal-content">
-        <span class="close" id="closeRegister">&times;</span>
-        <h2>Registrarse</h2>
-        <form>
-            <label for="registerEmail">Email:</label>
-            <input type="email" id="registerEmail" required>
-            <label for="registerPassword">Contraseña:</label>
-            <input type="password" id="registerPassword" required>
-            <a href="registro.php" class="register-link">¿Eres Funcionario o Alumno de la UCT? Presiona Aquí</a>
-            
-            <button type="submit">Registrarse</button>
-        </form>
-    </div>
-</div>
-
-    <div class="container mt-5">

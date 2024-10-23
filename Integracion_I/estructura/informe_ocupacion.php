@@ -1,8 +1,7 @@
 <?php 
 session_start();
 include('conex.php'); // Conexión a la base de datos
-include('cabecera.php'); // Encabezado HTML
-
+include('cabecera.php'); // Cabecera de la página
 // Datos de ejemplo para simular la disponibilidad de los estacionamientos
 $parking_spaces = [
     'A1' => 'Libre',
