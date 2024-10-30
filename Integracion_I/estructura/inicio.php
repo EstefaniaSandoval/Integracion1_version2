@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="estilo_inicio.css"> <!-- Enlace al archivo CSS externo -->
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="./estilo_inicio.css">
+  <!-- partial -->
+  <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'></script>
+  <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js'></script>
 </head>
 <body>
-    <div class="login-container">
-        <form class="login-form" method="POST" action="login.php">
-            <h2>Iniciar Sesión</h2>
-            <?php if (isset($error)): ?>
-                <p class="error-message"><?= $error ?></p>
-            <?php endif; ?>
-            <div class="input-group">
-                <label for="usuario">Usuario:</label>
-                <input type="text" id="usuario" name="usuario" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="button-group">
-                <button type="submit" class="btn-login">Iniciar Sesión</button>
-                <a href="registro.php" class="btn-registro">Registrarse</a>
-            </div>
-        </form>
+<!-- partial:index.partial.html -->
+<section>
+  <div class="form-box">
+    <div class="form-value">
+      <form action="">
+        <h2>Inicio Sesión</h2>
+        <div class="inputbox">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input type="text" required>
+          <label for="">Nombre Usuario</label>
+        </div>
+        <div class="inputbox">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input type="password" required>
+          <label for="">Contraseña</label>
+        </div>
+        <div class="forget">
+          <label>
+            <input type="checkbox"> Recuérdame
+          </label>
+          <label>
+            <a href="#">¿Olvidaste tu contraseña?</a>
+          </label>
+        </div>
+        <button>Iniciar Sesión</button>
+        <div class="register">
+          <p>¿No tienes una cuenta? <a href="./registro.php">Registrate por aquí</a></p>
+        </div>
+      </form>
     </div>
+  </div>
+</section>
 </body>
 </html>

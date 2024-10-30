@@ -1,45 +1,114 @@
-/* Estilo para todo el body */
-body {
-    background: linear-gradient(to right, #0011ff, #e6f7ff); /* Difuminado celeste */
-    font-family: 'Arial', sans-serif;
+* {
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* Asegurarse de que ocupe toda la altura de la ventana */
+    font-family: "Poppins", sans-serif;
+  }
+  
+  section {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-size: cover; /* Asegurarse de que el fondo cubra toda la pantalla */
-}
-
-/* Header con fondo azul celeste */
-header#img-uct {
-    background-color: #005eff; /* Azul celeste */
-    padding: 20px 0; /* Padding superior e inferior de 20px */
-    text-align: center; /* Centrar la imagen en el header */
-    width: 100%; /* Ancho completo */
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* General container styling */
-.conteiner {
-    background-color: white;
-    padding: 50px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
     width: 100%;
-    max-width: 500px;
-    text-align: left;
-}
-
-/* Footer */
-.futer {
+    background: url("./uct.jpg") no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .form-box {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    background: transparent;
+    border: 2px solid rgb(0, 149, 255);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h2 {
+    font-size: 2em;
+    color: #000000;
     text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #777;
+  }
+  
+  .inputbox {
+    position: relative;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid #fff;
+  }
+  
+  .inputbox label {
     position: absolute;
-    bottom: 0;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #000000;
+    font-size: 1em;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+  .inputbox input {
     width: 100%;
-}
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 0 35px 0 5px;
+    color: #000000;
+  }
+  
+  /* Mantiene el label arriba si el input está enfocado o tiene texto */
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    top: -5px;
+    font-size: 0.9em;
+    color: #000;
+  }
+  
+  .inputbox ion-icon {
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    top: 20px;
+  }
+  
+  button {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background: #0080ff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+  }
+  
+  button:hover {
+    background: #0b71c9;
+  }
+  
+  .register {
+    font-size: 0.9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0 10px;
+  }
+  
+  .register p a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .register p a:hover {
+    text-decoration: underline;
+  }
+  
