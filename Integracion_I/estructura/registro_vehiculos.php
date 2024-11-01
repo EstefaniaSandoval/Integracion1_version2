@@ -70,23 +70,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_type = $_POST['user_type'];
     $parking_space = $_POST['parking_space'];
 
-    // Asegúrate de que el nombre de la tabla y las columnas coincidan
+    // Insertar en vehiculos_registrados
     $query_insertar = "INSERT INTO vehiculos_registrados 
         (nombre, apellido, edad, sexo, tipo_usuario, patente, marca, modelo, color, espacio_estacionamiento) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conexion->prepare($query_insertar);
-    
-    if (!$stmt) {
-        die("Error al preparar la consulta de inserción: " . $conexion->error);
-    }
-
-    // Vincular parámetros en la consulta preparada
     $stmt->bind_param("ssisssssss", $owner_first_name, $owner_last_name, $owner_age, $owner_sex, $user_type, $vehicle_plate, $vehicle_brand, $vehicle_model, $vehicle_color, $parking_space);
 
-    // Ejecutar la consulta
     if ($stmt->execute()) {
         echo "<p style='color:green;'>Vehículo registrado exitosamente.</p>";
+
+        // Obtener el ID del vehículo insertado
+        $vehiculo_id = $conexion->insert_id;
+
+        // Insertar en historial_registros
+        $query_historial = "INSERT INTO historial_registros (vehiculo_id, patente, espacio_estacionamiento, accion) VALUES (?, ?, ?, 'Entrada')";
+        $stmt_historial = $conexion->prepare($query_historial);
+        $stmt_historial->bind_param("iss", $vehiculo_id, $vehicle_plate, $parking_space);
+        $stmt_historial->execute();
+        $stmt_historial->close();
+
     } else {
         echo "<p style='color:red;'>Error al registrar el vehículo: " . $stmt->error . "</p>";
     }
