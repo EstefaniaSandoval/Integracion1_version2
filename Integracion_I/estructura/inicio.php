@@ -5,8 +5,8 @@
   <title>Iniciar Sesión</title>
   <link rel="stylesheet" href="./estilo_inicio.css">
   <!-- partial -->
-  <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'></script>
-  <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js'></script>
+  <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js' type="module"></script>
+  <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js' type="module"></script>
 </head>
 <body>
 <!-- partial:index.partial.html -->
