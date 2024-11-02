@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Registro</title>
-  <link rel="stylesheet" href="./login.css">
+  <link rel="stylesheet" href="registro.css">
   <!-- partial -->
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'></script>
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js'></script>
@@ -33,16 +33,12 @@
         <div>
         <button>Registrarse</button>
         <div class="register">
-          <p>¿Ya tienes una cuenta? <a href="index.html">Inicia Sesion aquí</a></p>
+          <p>¿Ya tienes una cuenta? <a href="./inicio.php">Inicia Sesion aquí</a></p>
         </div>
       </form>
     </div>
   </div>
 </section>
-<footer class="futer">
-    <p>&copy; 2024 Universidad Católica de Temuco. Todos los derechos reservados en su Totalidad.</p>
-    <a href="https://www.uct.cl/">Nuestra Página Oficial</a>
-</footer>
 </body>
 </html>
 
