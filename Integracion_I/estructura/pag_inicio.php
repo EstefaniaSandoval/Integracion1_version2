@@ -1,6 +1,17 @@
 <?php include('cabecera.php'); ?>
 
 <?php
+session_start();
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['usuario'])) {
+    // Redirigir a la página de inicio de sesión si no está autenticado
+    header("Location: inicio.php");
+    exit();
+}
+
+?>
+
+<?php
 // Simulando datos de espacios de estacionamiento
 $parking_spaces = [
     'A1' => ['estado' => 'Libre', 'discapacitado' => false],
