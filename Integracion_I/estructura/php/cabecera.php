@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Archivo CSS de estilos personalizados -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
 <!-- Bootstrap CSS desde CDN -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
     <header class="bg-primary py-3">
         <nav class="navbar navbar-expand-lg navbar-dark container">
             <a class="navbar-brand" href="#">
-                <img src="../logo.png" alt="Logo Universidad" width="170" height="60"> <!-- Logo de la universidad -->
+                <img src="../img/logo.png" alt="Logo Universidad" width="170" height="60"> <!-- Logo de la universidad -->
         
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

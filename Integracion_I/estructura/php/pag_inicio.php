@@ -5,7 +5,7 @@ session_start();
 // Verificar si el usuario está autenticado
 if (!isset($_SESSION['usuario'])) {
     // Redirigir a la página de inicio de sesión si no está autenticado
-    header("Location: inicio.php");
+    header("Location: ../inicio.php");
     exit();
 }
 
@@ -33,7 +33,7 @@ $ocupados = $total_spaces - $libres;
 ?>
 
     <h1 class="text-center my-4">Gestión de Estacionamiento</h1>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <style>
         .resumen-grid {
             display: flex;

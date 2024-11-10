@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Iniciar Sesión</title>
-  <link rel="stylesheet" href="./estilo_inicio.css">
+  <link rel="stylesheet" href="./css/estilo_inicio.css">
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js' type="module"></script>
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js' type="module"></script>
 </head>
@@ -11,7 +11,7 @@
 <section>
   <div class="form-box">
     <div class="form-value">
-      <form action="./procesar_inicio.php" method="POST" id="loginForm">
+      <form action="./php/procesar_inicio.php" method="POST" id="loginForm">
         <h2>Inicio Sesión</h2>
         <div class="inputbox">
           <ion-icon name="mail-outline"></ion-icon>
@@ -28,12 +28,12 @@
             <input type="checkbox"> Recuérdame
           </label>
           <label>
-            <a href="./recuperar_contraseña.php">¿Olvidaste tu contraseña?</a>
+            <a href="./php/recuperar_contraseña.php">¿Olvidaste tu contraseña?</a>
           </label>
         </div>
         <button type="submit">Iniciar Sesión</button>
         <div class="register">
-          <p>¿No tienes una cuenta? <a href="./registro.php">Regístrate por aquí</a></p>
+          <p>¿No tienes una cuenta? <a href="./php/registro.php">Regístrate por aquí</a></p>
         </div>
       </form>
     </div>

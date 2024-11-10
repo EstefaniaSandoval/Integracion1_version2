@@ -4,11 +4,11 @@
     <!-- Bootstrap JS desde CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Archivo JavaScript de la lógica -->
-    <script src="Inicio-Register.js"></script>
+    <script src="../js/Inicio-Register.js"></script>
 </body>
     <!-- Bootstrap JS desde CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
         <!-- Archivo JavaScript de la lógica -->
-    <script src="Inicio-Register.js"></script>
+    <script src="../js/Inicio-Register.js"></script>
 </html>
 

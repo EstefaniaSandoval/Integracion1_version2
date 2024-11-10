@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Registro</title>
-  <link rel="stylesheet" href="registro.css">
+  <link rel="stylesheet" href="../css/registro.css">
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'></script>
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js'></script>
 </head>
@@ -30,7 +30,7 @@
         </div>
         <button type="submit">Registrarse</button>
         <div class="register">
-          <p>¿Ya tienes una cuenta? <a href="./inicio.php">Inicia Sesión aquí</a></p>
+          <p>¿Ya tienes una cuenta? <a href="./">Inicia Sesión aquí</a></p>
         </div>
       </form>
     </div>

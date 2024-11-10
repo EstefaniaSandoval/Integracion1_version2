@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $stmt = $conexion->prepare("SELECT contraseña FROM INFO1170_Usuarios WHERE nombre = ?");
+    $stmt = $conexion->prepare("SELECT contraseña FROM INFO1170_RegistroUsuarios WHERE nombre = ?");
     if ($stmt === false) {
         die("Error en la preparación de la consulta: " . $conexion->error);
     }
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         http_response_code(401); 
-        echo "<script>alert('Usuario o contraseña incorrectos'); window.location.href = './inicio.php';</script>";
+        echo "<script>alert('Usuario o contraseña incorrectos'); window.location.href = './';</script>";
     }
 
 

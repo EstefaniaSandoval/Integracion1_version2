@@ -1,6 +1,6 @@
 <?php include('cabecera.php'); ?>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../css/styles.css">
 <h2>Registro de Vehículos</h2>
 
 <form action="registro_vehiculos.php" method="POST">
