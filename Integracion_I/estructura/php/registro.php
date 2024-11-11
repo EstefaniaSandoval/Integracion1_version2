@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Registro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/registro.css">
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'></script>
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js'></script>

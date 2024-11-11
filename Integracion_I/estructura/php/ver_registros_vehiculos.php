@@ -1,7 +1,6 @@
 <?php include('cabecera.php'); ?>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <h2 class="text-center my-4">Registros de Vehículos</h2>
-
 <div class="container">
     <table class="table table-striped">
         <thead class="thead-dark">
