@@ -31,34 +31,47 @@
         <option value="visita">Visita</option>
     </select><br><br>
 
-    <!-- Patente del Vehículo -->
-    <label for="vehicle_plate">Patente del Vehículo:</label><br>
+    <!-- Patente del Veh culo -->
+    <label for="vehicle_plate">Patente del Veh culo:</label><br>
     <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
 
-    <!-- Marca del Vehículo -->
-    <label for="vehicle_brand">Marca del Vehículo:</label><br>
+    <!-- Marca del Veh culo -->
+    <label for="vehicle_brand">Marca del Veh culo:</label><br>
     <input type="text" id="vehicle_brand" name="vehicle_brand" required><br><br>
 
-    <!-- Modelo del Vehículo -->
-    <label for="vehicle_model">Modelo del Vehículo:</label><br>
+    <!-- Modelo del Veh culo -->
+    <label for="vehicle_model">Modelo del Veh culo:</label><br>
     <input type="text" id="vehicle_model" name="vehicle_model" required><br><br>
 
-    <!-- Color del Vehículo -->
-    <label for="vehicle_color">Color del Vehículo:</label><br>
+    <!-- Color del Veh culo -->
+    <label for="vehicle_color">Color del Veh culo:</label><br>
     <input type="text" id="vehicle_color" name="vehicle_color" required><br><br>
+
+    <!-- Filtro de Zona -->
+    <label for="zone_filter">Selecciona la zona:</label><br>
+    <select id="zone_filter" name="zone_filter" required>
+        <option value="">Selecciona una zona</option>
+        <option value="Zona A">Zona A</option>
+        <option value="Zona B">Zona B</option>
+        <option value="Zona C">Zona C</option>
+        <option value="Zona D">Zona D</option>
+    </select><br><br>
 
     <!-- Espacio de Estacionamiento -->
     <label for="parking_space">Espacio de Estacionamiento:</label><br>
-    <input type="text" id="parking_space" name="parking_space" required><br><br>
+    <select id="parking_space" name="parking_space" required>
+        <option value="">Selecciona un espacio</option>
+        <!-- Aqu  se llenar n los espacios din micamente con JavaScript -->
+    </select><br><br>
 
-    <input type="submit" value="Registrar Vehículo">
+    <input type="submit" value="Registrar Veh culo">
 </form>
 
 <?php
-include('conex.php'); // Conexión con la base de datos
+include('conex.php'); // Conexi n a la base de datos
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtener datos del formulario
+    // Obtener los datos del formulario
     $owner_first_name = $_POST['owner_first_name'];
     $owner_last_name = $_POST['owner_last_name'];
     $owner_age = $_POST['owner_age'];
@@ -70,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_type = $_POST['user_type'];
     $parking_space = $_POST['parking_space'];
 
-    // Insertar en vehiculos_registrados
+    // Insertar el veh culo en la base de datos
     $query_insertar = "INSERT INTO vehiculos_registrados 
         (nombre, apellido, edad, sexo, tipo_usuario, patente, marca, modelo, color, espacio_estacionamiento) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -79,9 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssisssssss", $owner_first_name, $owner_last_name, $owner_age, $owner_sex, $user_type, $vehicle_plate, $vehicle_brand, $vehicle_model, $vehicle_color, $parking_space);
 
     if ($stmt->execute()) {
-        echo "<p style='color:green;'>Vehículo registrado exitosamente.</p>";
+        echo "<p style='color:green;'>Veh culo registrado exitosamente.</p>";
 
-        // Obtener el ID del vehículo insertado
+        // Obtener el ID del veh culo insertado
         $vehiculo_id = $conexion->insert_id;
 
         // Insertar en historial_registros
@@ -91,12 +104,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_historial->execute();
         $stmt_historial->close();
 
+        // Actualizar el espacio de estacionamiento a 'Ocupado'
+        $query_actualizar_espacio = "UPDATE INFO1170_Estacionamiento SET Estado = 'Ocupado' WHERE IdEstacionamiento = ?";
+        $stmt_actualizar = $conexion->prepare($query_actualizar_espacio);
+        $stmt_actualizar->bind_param("s", $parking_space); // 's' para string, ya que IdEstacionamiento es varchar
+        if ($stmt_actualizar->execute()) {
+            echo "<p>Espacio de estacionamiento actualizado correctamente.</p>";
+        } else {
+            echo "<p style='color:red;'>Error al actualizar el estado del espacio.</p>";
+        }
+        $stmt_actualizar->close();
+
     } else {
-        echo "<p style='color:red;'>Error al registrar el vehículo: " . $stmt->error . "</p>";
+        echo "<p style='color:red;'>Error al registrar el veh culo: " . $stmt->error . "</p>";
     }
 
     $stmt->close();
 }
 ?>
+
+<script>
+// JavaScript para filtrar los espacios de estacionamiento seg n la zona seleccionada
+document.getElementById('zone_filter').addEventListener('change', function() {
+    var zone = this.value;
+    var parkingSpaceSelect = document.getElementById('parking_space');
+    
+    // Limpiar opciones previas
+    parkingSpaceSelect.innerHTML = '<option value="">Selecciona un espacio</option>';
+
+    if (zone) {
+        // Realizar una petici n AJAX para obtener los espacios de la zona seleccionada
+        fetch('get_parking_spaces.php?zone=' + zone)
+            .then(response => response.json())
+            .then(data => {
+                // Agregar las opciones de los espacios disponibles a la lista desplegable
+                data.forEach(space => {
+                    var option = document.createElement('option');
+                    option.value = space.IdEstacionamiento;
+                    option.textContent = space.IdEstacionamiento;
+                    parkingSpaceSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al obtener los espacios:', error));
+    }
+});
+</script>
 
 <?php include('pie.php'); ?>

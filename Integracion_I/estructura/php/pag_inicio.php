@@ -2,142 +2,54 @@
 
 <?php
 session_start();
-// Verificar si el usuario está autenticado
 if (!isset($_SESSION['usuario'])) {
-    // Redirigir a la página de inicio de sesión si no está autenticado
-    header("Location: ../inicio.php");
+    header("Location: inicio.php");
     exit();
 }
 
+include('conex.php');
+
+$parking_query = "SELECT Estado FROM INFO1170_Estacionamiento";
+$parking_result = $conexion->query($parking_query);
+
+$total_spaces = $parking_result->num_rows;
+$libres = 0;
+$ocupados = 0;
+
+while ($row = $parking_result->fetch_assoc()) {
+    if ($row['Estado'] === 'Disponible') {
+        $libres++;
+    } else {
+        $ocupados++;
+    }
+}
+
+$vehicle_query = "
+    SELECT CONCAT(nombre, ' ', apellido) AS propietario, patente, espacio_estacionamiento AS espacio_id, NOW() AS entrada
+    FROM vehiculos_registrados
+    ORDER BY id DESC
+    LIMIT 5";
+$vehicle_result = $conexion->query($vehicle_query);
 ?>
 
-<?php
-// Simulando datos de espacios de estacionamiento
-$parking_spaces = [
-    'A1' => ['estado' => 'Libre', 'discapacitado' => false],
-    'A2' => ['estado' => 'Ocupado', 'discapacitado' => false],
-    'B1' => ['estado' => 'Libre', 'discapacitado' => true],
-    'B2' => ['estado' => 'Ocupado', 'discapacitado' => false]
-];
+<link rel="stylesheet" href="../css/styles.css">
 
-// Simulando datos de vehículos registrados
-$vehicles = [
-    ['propietario' => 'Juan Pérez', 'patente' => 'ABC123', 'espacio_id' => 'A2', 'entrada' => '2024-09-12 08:30'],
-    ['propietario' => 'Ana García', 'patente' => 'XYZ789', 'espacio_id' => 'B2', 'entrada' => '2024-09-12 09:15']
-];
-
-// Resumen de los espacios de estacionamiento
-$total_spaces = count($parking_spaces);
-$libres = count(array_filter($parking_spaces, fn($space) => $space['estado'] == 'Libre'));
-$ocupados = $total_spaces - $libres;
-?>
-
-    <h1 class="text-center my-4">Gestión de Estacionamiento</h1>
-    <link rel="stylesheet" href="../css/styles.css">
-    <style>
-        .resumen-grid {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .resumen-box {
-            width: 150px;
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            text-align: center;
-        }
-        .total { background-color: #007bff; } /* Azul para el total */
-        .libres { background-color: #28a745; } /* Verde para libres */
-        .ocupados { background-color: #dc3545; } /* Rojo para ocupados */
-        
-        /* Estilo de tabla */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-family: Arial, sans-serif;
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #e0e0e0;
-        }
-        
-        /* Botones de acción */
-        .acciones {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 30px;
-        }
-        .btn {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        .main-footer {
-        padding: 60px 0; /* Espaciado superior e inferior */
-        text-align: center;
-        width: 100%; /* Ocupa todo el ancho */
-        position: relative; /* Mantener el footer fijo en la parte inferior */
-        bottom: 0;
-        }
-
-        .footer-content {
-            max-width: 1000px; /* Ancho más reducido para el contenido */
-            margin: 0 auto; /* Centra el contenido del footer */
-            padding: 0 20px; /* Agrega padding lateral */
-            display: flex; /* Utilizar Flexbox */
-            justify-content: space-between; /* Distribuir el contenido en una sola línea */
-            align-items: center; /* Alinear verticalmente */
-        }
-
-        .main-footer p {
-            margin: 0;
-            padding: 0;
-        }
-
-    </style>
-
-    <!-- Resumen de espacios en cuadros -->
-    <h2 class="text-center">Resumen de Espacios</h2>
-    <div class="resumen-grid">
-        <div class="resumen-box total">
-            Total: <?= $total_spaces; ?>
-        </div>
-        <div class="resumen-box libres">
-            Libres: <?= $libres; ?>
-        </div>
-        <div class="resumen-box ocupados">
-            Ocupados: <?= $ocupados; ?>
-        </div>
+<!-- Gráficos circulares -->
+<h2 class="text-center">Resumen de espacios</h2>
+<div class="chart-wrapper">
+    <div class="chart-container">
+        <canvas id="totalChart"></canvas>
     </div>
+    <div class="chart-container">
+        <canvas id="libresChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="ocupadosChart"></canvas>
+    </div>
+</div>
 
-    <!-- Tabla de Vehículos Registrados -->
-    <h2 class="text-center">Vehículos Registrados Recientemente</h2>
+<!-- Tabla de Vehículos Registrados -->
+<div class="table-container">
     <table>
         <thead>
             <tr>
@@ -148,33 +60,69 @@ $ocupados = $total_spaces - $libres;
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($vehicles as $vehicle): ?>
-                <tr>
-                    <td><?= $vehicle['propietario']; ?></td>
-                    <td><?= $vehicle['patente']; ?></td>
-                    <td><?= $vehicle['espacio_id']; ?></td>
-                    <td><?= $vehicle['entrada']; ?></td>
-                </tr>
-            <?php endforeach; ?>
+            <?php if ($vehicle_result->num_rows > 0): ?>
+                <?php while ($vehicle = $vehicle_result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($vehicle['propietario']); ?></td>
+                        <td><?= htmlspecialchars($vehicle['patente']); ?></td>
+                        <td><?= htmlspecialchars($vehicle['espacio_id']); ?></td>
+                        <td><?= htmlspecialchars($vehicle['entrada']); ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <tr><td colspan="4">No hay registros de vehículos recientes.</td></tr>
+            <?php endif; ?>
         </tbody>
     </table>
+</div>
 
-    <!-- Botones de acción -->
-    <h2 class="text-center">Acciones</h2>
-    <div class="acciones">
-        <a href="registro_vehiculos.php" class="btn">Registrar Vehículo</a>
-        <a href="gestion_espacios.php" class="btn">Gestionar Espacios</a>
-    </div>
-    <footer class="main-footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Universidad Católica de Temuco. Todos los derechos reservados.</p>
-            <p>
-                <a href="https://www.uct.cl" target="_blank">Página oficial UCT</a> | 
-                <a href="mailto:contacto@uct.cl">Contáctanos Aquí</a>
-            </p>
-        </div>
-    </footer>
-</body>
+<!-- Botones de acción -->
+<div class="acciones">
+    <a href="registro_vehiculos.php" class="btn">Registrar Vehículo</a>
+    <a href="gestion_espacios.php" class="btn">Gestionar Espacios</a>
+</div>
+
+<footer class="main-footer">
+    <p>&copy; 2024 Universidad Católica de Temuco. Todos los derechos reservados.</p>
+    <p>
+        <a href="https://www.uct.cl" target="_blank">Página oficial UCT</a> |
+        <a href="mailto:contacto@uct.cl">Contáctanos Aquí</a>
+    </p>
+</footer>
+
+<?php 
+include('pie.php'); 
+$conexion->close(); 
+?>
+
+<!-- JavaScript para crear los gráficos -->
+<script>
+    var ctxTotal = document.getElementById('totalChart').getContext('2d');
+    var ctxLibres = document.getElementById('libresChart').getContext('2d');
+    var ctxOcupados = document.getElementById('ocupadosChart').getContext('2d');
+
+    var totalChart = new Chart(ctxTotal, {
+        type: 'pie',
+        data: {
+            labels: ['Libres', 'Ocupados'],
+            datasets: [{
+                data: [<?= $libres; ?>, <?= $ocupados; ?>],
+                backgroundColor: ['#36a2eb', '#ff6384'],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
 </html>
-
-<?php include('pie.php'); ?>

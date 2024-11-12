@@ -16,6 +16,9 @@
 
 <!-- Bootstrap JS desde CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 
     <title>Registro de Vehículos - Universidad</title>
@@ -25,8 +28,13 @@
         <nav class="navbar navbar-expand-lg navbar-dark container">
             <a class="navbar-brand" href="#">
                 <img src="../img/logo.png" alt="Logo Universidad" width="170" height="60"> <!-- Logo de la universidad -->
-        
             </a>
+
+            <!-- Título centrado entre el logo y el menú -->
+            <div class="navbar-title" style="margin-left: 20px; flex-grow: 1; text-align: center;">
+                <h1 class="text-white">Gestión De Estacionamiento</h1>
+            </div>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
