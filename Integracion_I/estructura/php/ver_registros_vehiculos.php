@@ -18,34 +18,16 @@
         </thead>
         <tbody>
             <?php
-            include('conex.php'); 
-
-            // Manejo de la salida del vehículo
-            if (isset($_GET['exit_id'])) {
-                $id = $_GET['exit_id'];
-                $query_vehicle = "SELECT patente, espacio_estacionamiento FROM vehiculos_registrados WHERE id = ?";
-                $stmt_vehicle = $conexion->prepare($query_vehicle);
-                $stmt_vehicle->bind_param("i", $id);
-                $stmt_vehicle->execute();
-                $stmt_vehicle->bind_result($patente, $espacio_estacionamiento);
-                $stmt_vehicle->fetch();
-                $stmt_vehicle->close();
-
-                $query_salida = "INSERT INTO historial_registros (vehiculo_id, patente, espacio_estacionamiento, accion) VALUES (?, ?, ?, 'Salida')";
-                $stmt_salida = $conexion->prepare($query_salida);
-                $stmt_salida->bind_param("iss", $id, $patente, $espacio_estacionamiento);
-                $stmt_salida->execute();
-                $stmt_salida->close();
-
-                echo "<script>alert('Registro de salida exitoso'); window.location.href='ver_registros_vehiculos.php';</script>";
-            }
+            include('conex.php');
 
             // Paginación
             $limit = 10; // Número de registros por página
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
             $offset = ($page - 1) * $limit;
 
-            $query = "SELECT nombre, apellido, edad, sexo, tipo_usuario, patente, marca, espacio_estacionamiento FROM vehiculos_registrados LIMIT $limit OFFSET $offset";
+            $query = "SELECT id, nombre, apellido, edad, sexo, tipo_usuario, patente, marca, espacio_estacionamiento 
+                      FROM vehiculos_registrados 
+                      LIMIT $limit OFFSET $offset";
             $result = $conexion->query($query);
 
             if ($result->num_rows > 0) {
@@ -59,7 +41,11 @@
                             <td>{$row['patente']}</td>
                             <td>{$row['marca']}</td>
                             <td>{$row['espacio_estacionamiento']}</td>
-                            <td><a href='ver_registros_vehiculos.php?exit_id={$row['id']}'>Registrar Salida</a></td>
+                            <td>
+                                <a class='btn btn-primary btn-sm' href='editar_vehiculo.php?id={$row['id']}'>Editar</a>
+                                <a class='btn btn-danger btn-sm' href='eliminar_registro.php?id={$row['id']}'>Eliminar</a>
+                                <a class='btn btn-success btn-sm' href='ver_registros_vehiculos.php?exit_id={$row['id']}'>Salida</a>
+                            </td>
                           </tr>";
                 }
             } else {
@@ -70,15 +56,16 @@
     </table>
     <div class="pagination">
         <?php
+        // Obtener el total de registros
         $result_total = $conexion->query("SELECT COUNT(*) AS total FROM vehiculos_registrados");
         $total_rows = $result_total->fetch_assoc()['total'];
         $total_pages = ceil($total_rows / $limit);
 
+        // Generar los enlaces de paginación
         for ($i = 1; $i <= $total_pages; $i++) {
-            echo "<a href='ver_registros_vehiculos.php?page=$i'>$i</a> ";
+            echo "<a href='ver_registros_vehiculos.php?page=$i' class='btn btn-link'>$i</a> ";
         }
         ?>
     </div>
 </div>
-
 <?php include('pie.php'); ?>

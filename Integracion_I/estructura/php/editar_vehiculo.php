@@ -31,13 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_type = $_POST['user_type'];
     $vehicle_plate = $_POST['vehicle_plate'];
     $vehicle_brand = $_POST['vehicle_brand'];
-    $vehicle_model = $_POST['vehicle_model'];
-    $vehicle_color = $_POST['vehicle_color'];
     $parking_space = $_POST['parking_space'];
 
-    $update_query = "UPDATE vehiculos_registrados SET nombre = ?, apellido = ?, edad = ?, sexo = ?, tipo_usuario = ?, patente = ?, marca = ?, modelo = ?, color = ?, espacio_estacionamiento = ? WHERE id = ?";
+    $update_query = "UPDATE vehiculos_registrados SET nombre = ?, apellido = ?, edad = ?, sexo = ?, tipo_usuario = ?, patente = ?, marca = ?, espacio_estacionamiento = ? WHERE id = ?";
     $stmt = $conexion->prepare($update_query);
-    $stmt->bind_param("ssisssssssi", $owner_first_name, $owner_last_name, $owner_age, $owner_sex, $user_type, $vehicle_plate, $vehicle_brand, $vehicle_model, $vehicle_color, $parking_space, $id);
+    $stmt->bind_param("ssisssssi", $owner_first_name, $owner_last_name, $owner_age, $owner_sex, $user_type, $vehicle_plate, $vehicle_brand, $parking_space, $id);
 
     if ($stmt->execute()) {
         echo "<script>alert('Registro actualizado exitosamente'); window.location.href='ver_registros_vehiculos.php';</script>";
@@ -81,12 +79,6 @@ $conexion->close();
 
         <label for="vehicle_brand">Marca del Vehículo:</label>
         <input type="text" id="vehicle_brand" name="vehicle_brand" value="<?php echo htmlspecialchars($vehicle['marca']); ?>" required><br><br>
-
-        <label for="vehicle_model">Modelo del Vehículo:</label>
-        <input type="text" id="vehicle_model" name="vehicle_model" value="<?php echo htmlspecialchars($vehicle['modelo']); ?>" required><br><br>
-
-        <label for="vehicle_color">Color del Vehículo:</label>
-        <input type="text" id="vehicle_color" name="vehicle_color" value="<?php echo htmlspecialchars($vehicle['color']); ?>" required><br><br>
 
         <label for="parking_space">Espacio de Estacionamiento:</label>
         <input type="text" id="parking_space" name="parking_space" value="<?php echo htmlspecialchars($vehicle['espacio_estacionamiento']); ?>" required><br><br>

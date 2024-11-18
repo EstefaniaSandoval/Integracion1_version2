@@ -39,11 +39,28 @@
     <label for="vehicle_brand">Marca del Vehículo:</label><br>
     <input type="text" id="vehicle_brand" name="vehicle_brand" required><br><br>
 
-    <input type="submit" value="Registrar">
+    <!-- Filtro de Zona -->
+    <label for="zone_filter">Selecciona la zona:</label><br>
+    <select id="zone_filter" name="zone_filter" required>
+        <option value="">Selecciona una zona</option>
+        <option value="Zona A">Zona A</option>
+        <option value="Zona B">Zona B</option>
+        <option value="Zona C">Zona C</option>
+        <option value="Zona D">Zona D</option>
+    </select><br><br>
+
+    <!-- Espacio de Estacionamiento -->
+    <label for="parking_space">Espacio de Estacionamiento:</label><br>
+    <select id="parking_space" name="parking_space" required>
+        <option value="">Selecciona un espacio</option>
+        <!-- Aquí se llenarán los espacios dinámicamente con JavaScript -->
+    </select><br><br>
+
+    <input type="submit" value="Registrar Vehículo">
 </form>
 
 <?php
-include('conex.php'); // Conexi n a la base de datos
+include('conex.php'); // Conexión a la base de datos
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener los datos del formulario
@@ -56,18 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_type = $_POST['user_type'];
     $parking_space = $_POST['parking_space'];
 
-    // Insertar el vehiculo en la base de datos
+    // Insertar el vehículo en la base de datos
     $query_insertar = "INSERT INTO vehiculos_registrados 
         (nombre, apellido, edad, sexo, tipo_usuario, patente, marca, espacio_estacionamiento) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conexion->prepare($query_insertar);
-    $stmt->bind_param("ssisssssss", $owner_first_name, $owner_last_name, $owner_age, $owner_sex, $user_type, $vehicle_plate, $vehicle_brand, $vehicle_model, $vehicle_color, $parking_space);
+    $stmt->bind_param("ssisssss", $owner_first_name, $owner_last_name, $owner_age, $owner_sex, $user_type, $vehicle_plate, $vehicle_brand, $parking_space);
 
     if ($stmt->execute()) {
-        echo "<p style='color:green;'>Vehiculo registrado exitosamente.</p>";
+        echo "<p style='color:green;'>Vehículo registrado exitosamente.</p>";
 
-        // Obtener el ID del vehiculo insertado
+        // Obtener el ID del vehículo insertado
         $vehiculo_id = $conexion->insert_id;
 
         // Insertar en historial_registros
@@ -89,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_actualizar->close();
 
     } else {
-        echo "<p style='color:red;'>Error al registrar el veh culo: " . $stmt->error . "</p>";
+        echo "<p style='color:red;'>Error al registrar el vehículo: " . $stmt->error . "</p>";
     }
 
     $stmt->close();
@@ -97,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <script>
-// JavaScript para filtrar los espacios de estacionamiento seg n la zona seleccionada
+// JavaScript para filtrar los espacios de estacionamiento según la zona seleccionada
 document.getElementById('zone_filter').addEventListener('change', function() {
     var zone = this.value;
     var parkingSpaceSelect = document.getElementById('parking_space');
@@ -106,7 +123,7 @@ document.getElementById('zone_filter').addEventListener('change', function() {
     parkingSpaceSelect.innerHTML = '<option value="">Selecciona un espacio</option>';
 
     if (zone) {
-        // Realizar una petici n AJAX para obtener los espacios de la zona seleccionada
+        // Realizar una petición AJAX para obtener los espacios de la zona seleccionada
         fetch('get_parking_spaces.php?zone=' + zone)
             .then(response => response.json())
             .then(data => {
