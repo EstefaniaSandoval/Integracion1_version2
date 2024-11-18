@@ -31,40 +31,15 @@
         <option value="visita">Visita</option>
     </select><br><br>
 
-    <!-- Patente del Veh culo -->
-    <label for="vehicle_plate">Patente del Veh culo:</label><br>
+    <!-- Patente del Vehículo -->
+    <label for="vehicle_plate">Patente del Vehículo:</label><br>
     <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
 
-    <!-- Marca del Veh culo -->
-    <label for="vehicle_brand">Marca del Veh culo:</label><br>
+    <!-- Marca del Vehículo -->
+    <label for="vehicle_brand">Marca del Vehículo:</label><br>
     <input type="text" id="vehicle_brand" name="vehicle_brand" required><br><br>
 
-    <!-- Modelo del Veh culo -->
-    <label for="vehicle_model">Modelo del Veh culo:</label><br>
-    <input type="text" id="vehicle_model" name="vehicle_model" required><br><br>
-
-    <!-- Color del Veh culo -->
-    <label for="vehicle_color">Color del Veh culo:</label><br>
-    <input type="text" id="vehicle_color" name="vehicle_color" required><br><br>
-
-    <!-- Filtro de Zona -->
-    <label for="zone_filter">Selecciona la zona:</label><br>
-    <select id="zone_filter" name="zone_filter" required>
-        <option value="">Selecciona una zona</option>
-        <option value="Zona A">Zona A</option>
-        <option value="Zona B">Zona B</option>
-        <option value="Zona C">Zona C</option>
-        <option value="Zona D">Zona D</option>
-    </select><br><br>
-
-    <!-- Espacio de Estacionamiento -->
-    <label for="parking_space">Espacio de Estacionamiento:</label><br>
-    <select id="parking_space" name="parking_space" required>
-        <option value="">Selecciona un espacio</option>
-        <!-- Aqu  se llenar n los espacios din micamente con JavaScript -->
-    </select><br><br>
-
-    <input type="submit" value="Registrar Veh culo">
+    <input type="submit" value="Registrar">
 </form>
 
 <?php
@@ -78,23 +53,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $owner_sex = $_POST['owner_sex'];
     $vehicle_plate = $_POST['vehicle_plate'];
     $vehicle_brand = $_POST['vehicle_brand'];
-    $vehicle_model = $_POST['vehicle_model'];
-    $vehicle_color = $_POST['vehicle_color'];
     $user_type = $_POST['user_type'];
     $parking_space = $_POST['parking_space'];
 
-    // Insertar el veh culo en la base de datos
+    // Insertar el vehiculo en la base de datos
     $query_insertar = "INSERT INTO vehiculos_registrados 
-        (nombre, apellido, edad, sexo, tipo_usuario, patente, marca, modelo, color, espacio_estacionamiento) 
+        (nombre, apellido, edad, sexo, tipo_usuario, patente, marca, espacio_estacionamiento) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conexion->prepare($query_insertar);
     $stmt->bind_param("ssisssssss", $owner_first_name, $owner_last_name, $owner_age, $owner_sex, $user_type, $vehicle_plate, $vehicle_brand, $vehicle_model, $vehicle_color, $parking_space);
 
     if ($stmt->execute()) {
-        echo "<p style='color:green;'>Veh culo registrado exitosamente.</p>";
+        echo "<p style='color:green;'>Vehiculo registrado exitosamente.</p>";
 
-        // Obtener el ID del veh culo insertado
+        // Obtener el ID del vehiculo insertado
         $vehiculo_id = $conexion->insert_id;
 
         // Insertar en historial_registros

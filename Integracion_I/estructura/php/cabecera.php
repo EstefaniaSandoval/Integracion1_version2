@@ -52,6 +52,7 @@
                             <a class="dropdown-item" href="gestion_espacios.php">Gestión de Espacios</a>
                             <a class="dropdown-item" href="informe_ocupacion.php">Informe de Ocupación</a>
                             <a class="dropdown-item" href="ver_registros_vehiculos.php">Ver Registros de Vehículos</a>
+                            <a class="dropdown-item" href="ver_historial_vehiculos.php">Ver Historial de Vehículos</a>
                         </div>
                     </li>
                 </ul>
