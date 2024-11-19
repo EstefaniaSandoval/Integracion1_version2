@@ -36,8 +36,49 @@
     <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
 
     <!-- Marca del Vehículo -->
-    <label for="vehicle_brand">Marca del Vehículo:</label><br>
-    <input type="text" id="vehicle_brand" name="vehicle_brand" required><br><br>
+<label for="vehicle_brand">Marca del Vehículo:</label><br>
+<select id="vehicle_brand" name="vehicle_brand" class="select-search" required>
+    <option value="">Selecciona una marca</option>
+</select><br><br>
+
+<script>
+// Cargar marcas dinámicamente al cargar la página
+document.addEventListener('DOMContentLoaded', function () {
+    const brandSelect = document.getElementById('vehicle_brand');
+
+    // Petición AJAX para obtener las marcas de vehículos
+    fetch('get_vehicle_brands.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error(data.error);
+                return;
+            }
+
+            data.forEach(brand => {
+                const option = document.createElement('option');
+                option.value = brand.name; // Usamos 'name' porque así lo definimos en el PHP
+                option.textContent = brand.name;
+                brandSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error al cargar marcas:', error));
+});
+
+// Habilitar búsqueda dentro del select
+document.addEventListener('DOMContentLoaded', function () {
+    const selectSearch = document.querySelector('.select-search');
+    $(selectSearch).select2({
+        placeholder: 'Busca una marca',
+        allowClear: true
+    });
+});
+</script>
+
+<!-- Enlace para incluir select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+
 
     <!-- Filtro de Zona -->
     <label for="zone_filter">Selecciona la zona:</label><br>
@@ -139,5 +180,20 @@ document.getElementById('zone_filter').addEventListener('change', function() {
     }
 });
 </script>
+<script>
+// Convertir a mayúsculas solo los campos de texto
+document.addEventListener('DOMContentLoaded', function () {
+    // Selecciona solo los campos de texto (input[type="text"] y input[type="number"])
+    const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', function () {
+            // Convierte el valor a mayúsculas
+            this.value = this.value.toUpperCase();
+        });
+    });
+});
+</script>
+
 
 <?php include('pie.php'); ?>
