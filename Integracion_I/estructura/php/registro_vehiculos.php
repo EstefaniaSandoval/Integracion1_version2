@@ -1,45 +1,86 @@
 <?php include('cabecera.php'); ?>
 
-<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/registro_vehiculos.css">
 <h2>Registro de Vehículos</h2>
-
 <form action="registro_vehiculos.php" method="POST">
-    <!-- Nombre -->
-    <label for="owner_first_name">Nombre del propietario:</label><br>
-    <input type="text" id="owner_first_name" name="owner_first_name" required><br><br>
+    <!-- Primera fila: Nombre y Apellido -->
+    <div class="form-row">
+        <div>
+            <label for="owner_first_name">Nombre del propietario:</label>
+            <input type="text" id="owner_first_name" name="owner_first_name" required>
+        </div>
+        <div>
+            <label for="owner_last_name">Apellido del propietario:</label>
+            <input type="text" id="owner_last_name" name="owner_last_name" required>
+        </div>
+    </div>
 
-    <!-- Apellido -->
-    <label for="owner_last_name">Apellido del propietario:</label><br>
-    <input type="text" id="owner_last_name" name="owner_last_name" required><br><br>
+    <!-- Segunda fila: Edad y Sexo -->
+    <div class="form-row">
+        <div>
+            <label for="owner_age">Edad del Propietario:</label>
+            <input type="number" id="owner_age" name="owner_age" required>
+        </div>
+        <div>
+            <label for="owner_sex">Sexo:</label>
+            <select id="owner_sex" name="owner_sex" required>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+        </div>
+    </div>
 
-    <!-- Edad -->
-    <label for="owner_age">Edad del Propietario:</label><br>
-    <input type="number" id="owner_age" name="owner_age" required><br><br>
+    <!-- Tercera fila: Tipo de Usuario y Patente -->
+    <div class="form-row">
+        <div>
+            <label for="user_type">Tipo de Usuario:</label>
+            <select id="user_type" name="user_type" required>
+                <option value="profesor">Profesor</option>
+                <option value="alumno">Alumno</option>
+                <option value="visita">Visita</option>
+            </select>
+        </div>
+        <div>
+            <label for="vehicle_plate">Patente del Vehículo:</label>
+            <input type="text" id="vehicle_plate" name="vehicle_plate" required>
+        </div>
+    </div>
 
-    <!-- Sexo -->
-    <label for="owner_sex">Sexo:</label><br>
-    <select id="owner_sex" name="owner_sex" required>
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
-    </select><br><br>
+    <!-- Cuarta fila: Marca del Vehículo y Zona -->
+    <div class="form-row">
+        <div>
+            <label for="vehicle_brand">Marca del Vehículo:</label>
+            <select id="vehicle_brand" name="vehicle_brand" class="select-search" required>
+                <option value="">Selecciona una marca</option>
+            </select>
+        </div>
+        <div>
+            <label for="zone_filter">Selecciona la zona:</label>
+            <select id="zone_filter" name="zone_filter" required>
+                <option value="">Selecciona una zona</option>
+                <option value="Zona A">Zona A</option>
+                <option value="Zona B">Zona B</option>
+                <option value="Zona C">Zona C</option>
+                <option value="Zona D">Zona D</option>
+            </select>
+        </div>
+    </div>
 
-    <!-- Tipo de Usuario -->
-    <label for="user_type">Tipo de Usuario:</label><br>
-    <select id="user_type" name="user_type" required>
-        <option value="profesor">Profesor</option>
-        <option value="alumno">Alumno</option>
-        <option value="visita">Visita</option>
-    </select><br><br>
+    <!-- Última fila: Espacio de Estacionamiento -->
+    <div class="form-row">
+        <div>
+            <label for="parking_space">Espacio de Estacionamiento:</label>
+            <select id="parking_space" name="parking_space" required>
+                <option value="">Selecciona un espacio</option>
+            </select>
+        </div>
+    </div>
 
-    <!-- Patente del Vehículo -->
-    <label for="vehicle_plate">Patente del Vehículo:</label><br>
-    <input type="text" id="vehicle_plate" name="vehicle_plate" required><br><br>
-
-    <!-- Marca del Vehículo -->
-<label for="vehicle_brand">Marca del Vehículo:</label><br>
-<select id="vehicle_brand" name="vehicle_brand" class="select-search" required>
-    <option value="">Selecciona una marca</option>
-</select><br><br>
+    <!-- Botón de envío -->
+    <div>
+        <input type="submit" value="Registrar Vehículo">
+    </div>
+</form>
 
 <script>
 // Cargar marcas dinámicamente al cargar la página
@@ -57,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             data.forEach(brand => {
                 const option = document.createElement('option');
-                option.value = brand.name; // Usamos 'name' porque así lo definimos en el PHP
+                option.value = brand.name;
                 option.textContent = brand.name;
                 brandSelect.appendChild(option);
             });
@@ -75,30 +116,46 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<!-- Enlace para incluir select2 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+<script>
+// JavaScript para filtrar los espacios de estacionamiento según la zona seleccionada
+document.getElementById('zone_filter').addEventListener('change', function() {
+    var zone = this.value;
+    var parkingSpaceSelect = document.getElementById('parking_space');
+    
+    // Limpiar opciones previas
+    parkingSpaceSelect.innerHTML = '<option value="">Selecciona un espacio</option>';
 
+    if (zone) {
+        // Realizar una petición AJAX para obtener los espacios de la zona seleccionada
+        fetch('get_parking_spaces.php?zone=' + zone)
+            .then(response => response.json())
+            .then(data => {
+                // Agregar las opciones de los espacios disponibles a la lista desplegable
+                data.forEach(space => {
+                    var option = document.createElement('option');
+                    option.value = space.IdEstacionamiento;
+                    option.textContent = space.IdEstacionamiento;
+                    parkingSpaceSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al obtener los espacios:', error));
+    }
+});
+</script>
 
-    <!-- Filtro de Zona -->
-    <label for="zone_filter">Selecciona la zona:</label><br>
-    <select id="zone_filter" name="zone_filter" required>
-        <option value="">Selecciona una zona</option>
-        <option value="Zona A">Zona A</option>
-        <option value="Zona B">Zona B</option>
-        <option value="Zona C">Zona C</option>
-        <option value="Zona D">Zona D</option>
-    </select><br><br>
+<script>
+// Convertir a mayúsculas solo los campos de texto
+document.addEventListener('DOMContentLoaded', function () {
+    const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
 
-    <!-- Espacio de Estacionamiento -->
-    <label for="parking_space">Espacio de Estacionamiento:</label><br>
-    <select id="parking_space" name="parking_space" required>
-        <option value="">Selecciona un espacio</option>
-        <!-- Aquí se llenarán los espacios dinámicamente con JavaScript -->
-    </select><br><br>
+    inputs.forEach(input => {
+        input.addEventListener('input', function () {
+            this.value = this.value.toUpperCase();
+        });
+    });
+});
+</script>
 
-    <input type="submit" value="Registrar Vehículo">
-</form>
 
 <?php
 include('conex.php'); // Conexión a la base de datos
@@ -153,6 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 }
 ?>
+
 
 <script>
 // JavaScript para filtrar los espacios de estacionamiento según la zona seleccionada
