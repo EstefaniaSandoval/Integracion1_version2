@@ -2,6 +2,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <h2 class="text-center my-4">Registros de Vehículos</h2>
 <div class="container">
+    <form action="generar_pdf.php" method="get">
+        <input type="hidden" name="page" value="<?php echo isset($_GET['page']) ? $_GET['page'] : 1; ?>">
+        <button type="submit" class="btn btn-success mb-3">Generar PDF</button>
+    </form>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
