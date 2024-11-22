@@ -22,7 +22,7 @@ $data_estacionamiento = $result_estacionamiento->fetch_assoc();
 $query_historial = "
     SELECT 
         id, vehiculo_id, patente, espacio_estacionamiento, fecha, accion 
-    FROM historial_registros 
+    FROM INFO1170_HistorialRegistros 
     ORDER BY fecha DESC 
     LIMIT 10";
 $result_historial = $conexion->query($query_historial);
@@ -33,7 +33,7 @@ $query_grafico = "
         DATE(fecha) AS fecha, 
         SUM(CASE WHEN accion = 'Entrada' THEN 1 ELSE 0 END) AS entradas, 
         SUM(CASE WHEN accion = 'Salida' THEN 1 ELSE 0 END) AS salidas 
-    FROM historial_registros 
+    FROM INFO1170_HistorialRegistros 
     GROUP BY DATE(fecha)";
 $result_grafico = $conexion->query($query_grafico);
 

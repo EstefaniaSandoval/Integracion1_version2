@@ -22,7 +22,7 @@
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
             $offset = ($page - 1) * $limit;
 
-            $query = "SELECT vehiculo_id, patente, espacio_estacionamiento, accion, fecha FROM historial_registros LIMIT $limit OFFSET $offset";
+            $query = "SELECT vehiculo_id, patente, espacio_estacionamiento, accion, fecha FROM INFO1170_HistorialRegistros LIMIT $limit OFFSET $offset";
             $result = $conexion->query($query);
 
             if ($result->num_rows > 0) {
@@ -43,7 +43,7 @@
     </table>
     <div class="pagination">
         <?php
-        $result_total = $conexion->query("SELECT COUNT(*) AS total FROM historial_registros");
+        $result_total = $conexion->query("SELECT COUNT(*) AS total FROM INFO1170_HistorialRegistros");
         $total_rows = $result_total->fetch_assoc()['total'];
         $total_pages = ceil($total_rows / $limit);
 

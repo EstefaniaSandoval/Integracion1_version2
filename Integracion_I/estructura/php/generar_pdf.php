@@ -8,7 +8,7 @@ $valor = isset($_GET['valor']) ? $_GET['valor'] : null;
 
 // Construir la consulta SQL con filtro
 $query = "SELECT nombre, apellido, edad, sexo, tipo_usuario, patente, marca, espacio_estacionamiento 
-          FROM vehiculos_registrados";
+          FROM INFO1170_VehiculosRegistrados";
 
 if ($filtro && $valor) {
     $query .= " WHERE $filtro LIKE ?";

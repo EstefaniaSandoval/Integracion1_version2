@@ -9,7 +9,7 @@ try {
         $patente = strtoupper(trim($_POST['vehicle_plate']));
 
         if (preg_match('/^[A-Z]{2}\d{4}$|^[A-Z]{4}\d{2}$/', $patente)) {
-            $query = "SELECT * FROM vehiculos_registrados WHERE patente = ?";
+            $query = "SELECT * FROM INFO1170_VehiculosRegistrados WHERE patente = ?";
             $stmt = $conexion->prepare($query);
             if (!$stmt) {
                 throw new Exception("Error en la preparación de la consulta: " . $conexion->error);
@@ -20,9 +20,9 @@ try {
             $result = $stmt->get_result();
 
             if ($result->num_rows > 0) {
-                $query_historial = "SELECT * FROM historial_registros WHERE patente = ? AND accion = 'Entrada' AND NOT EXISTS (
-                    SELECT 1 FROM historial_registros WHERE patente = ? AND accion = 'Salida' AND fecha > (
-                        SELECT MAX(fecha) FROM historial_registros WHERE patente = ? AND accion = 'Entrada'
+                $query_historial = "SELECT * FROM INFO1170_HistorialRegistros WHERE patente = ? AND accion = 'Entrada' AND NOT EXISTS (
+                    SELECT 1 FROM INFO1170_HistorialRegistros WHERE patente = ? AND accion = 'Salida' AND fecha > (
+                        SELECT MAX(fecha) FROM INFO1170_HistorialRegistros WHERE patente = ? AND accion = 'Entrada'
                     )
                 )";
                 $stmt_historial = $conexion->prepare($query_historial);
@@ -50,7 +50,7 @@ try {
                         $espacio_estacionamiento = $espacio['IdEstacionamiento'];
 
                         $vehiculo = $result->fetch_assoc();
-                        $query_insert_historial = "INSERT INTO historial_registros (vehiculo_id, patente, espacio_estacionamiento, accion, fecha) 
+                        $query_insert_historial = "INSERT INTO INFO1170_HistorialRegistros (vehiculo_id, patente, espacio_estacionamiento, accion, fecha) 
                                                    VALUES (?, ?, ?, 'Entrada', NOW())";
                         $stmt_insert_historial = $conexion->prepare($query_insert_historial);
                         if (!$stmt_insert_historial) {

@@ -12,11 +12,7 @@
             <option value="">Seleccionar Filtro</option>
             <option value="nombre">Nombre</option>
             <option value="apellido">Apellido</option>
-            <option value="edad">Edad</option>
-            <option value="sexo">Sexo</option>
-            <option value="tipo_usuario">Tipo de Usuario</option>
             <option value="patente">Patente</option>
-            <option value="marca">Marca</option>
             <option value="espacio_estacionamiento">Espacio de Estacionamiento</option>
         </select>
         <div id="filtro-opciones" class="mt-3"></div> <!-- Aquí se generarán dinámicamente las opciones -->
@@ -28,11 +24,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Edad</th>
-                <th>Sexo</th>
-                <th>Tipo de Usuario</th>
                 <th>Patente</th>
-                <th>Marca</th>
                 <th>Espacio de Estacionamiento</th>
                 <th>Acciones</th>
             </tr>
@@ -51,8 +43,8 @@
         $valor = isset($_GET['valor']) ? $_GET['valor'] : null;
 
         // Construir la consulta SQL
-        $query = "SELECT id, nombre, apellido, edad, sexo, tipo_usuario, patente, marca, espacio_estacionamiento 
-                FROM vehiculos_registrados";
+        $query = "SELECT id, nombre, apellido, patente, espacio_estacionamiento 
+                FROM INFO1170_VehiculosRegistrados";
 
         // Si hay un filtro, agrega una condición WHERE
         if ($filtro && $valor) {
@@ -76,11 +68,7 @@
                 echo "<tr>
                         <td>{$row['nombre']}</td>
                         <td>{$row['apellido']}</td>
-                        <td>{$row['edad']}</td>
-                        <td>{$row['sexo']}</td>
-                        <td>{$row['tipo_usuario']}</td>
                         <td>{$row['patente']}</td>
-                        <td>{$row['marca']}</td>
                         <td>{$row['espacio_estacionamiento']}</td>
                         <td>
                             <a class='btn btn-primary btn-sm' href='editar_vehiculo.php?id={$row['id']}'>Editar</a>
@@ -108,7 +96,7 @@
     <div class="pagination">
         <?php
         // Obtener el total de registros
-        $result_total = $conexion->query("SELECT COUNT(*) AS total FROM vehiculos_registrados");
+        $result_total = $conexion->query("SELECT COUNT(*) AS total FROM INFO1170_VehiculosRegistrados");
         $total_rows = $result_total->fetch_assoc()['total'];
         $total_pages = ceil($total_rows / $limit);
 
@@ -186,23 +174,7 @@
             // Genera el campo de entrada según el filtro seleccionado
             if (['nombre', 'apellido', 'patente', 'marca'].includes(filtro)) {
                 campo = `<input type="text" id="filtro-valor" class="form-control" placeholder="Ingrese ${filtro}">`;
-            } else if (filtro === 'edad') {
-                campo = `<input type="number" id="filtro-valor" class="form-control" placeholder="Ingrese edad">`;
-            } else if (filtro === 'sexo') {
-                campo = `
-                    <select id="filtro-valor" class="form-control">
-                        <option value="">Seleccione</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                    </select>`;
-            } else if (filtro === 'tipo_usuario') {
-                campo = `
-                    <select id="filtro-valor" class="form-control">
-                        <option value="">Seleccione</option>
-                        <option value="Alumno">Alumno</option>
-                        <option value="Profesor">Profesor</option>
-                        <option value="Visita">Visita</option>
-                    </select>`;
+        
             } else if (filtro === 'espacio_estacionamiento') {
                 campo = `<input type="texto" id="filtro-valor" class="form-control" placeholder="Ingrese espacio de estacionamiento">`;
             }
