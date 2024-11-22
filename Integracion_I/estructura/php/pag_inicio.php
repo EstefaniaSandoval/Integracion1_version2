@@ -81,6 +81,9 @@ $vehicle_result = $conexion->query($vehicle_query);
 <div class="acciones">
     <a href="registro_vehiculos.php" class="btn">Registrar Vehículo</a>
     <a href="gestion_espacios.php" class="btn">Gestionar Espacios</a>
+
+
+    
 </div>
 
 <footer>
@@ -117,7 +120,7 @@ $vehicle_result = $conexion->query($vehicle_query);
             <div class="footer-column">
                 <h3>Información</h3>
                 <div class="info">
-                    <a href="Terminos.html">
+                    <a href="terminos.php">
                         <img src="../img/footer/terminos.png" alt="Términos y Condiciones">
                         Términos y Condiciones
                     </a>

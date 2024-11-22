@@ -117,7 +117,7 @@
             <div class="footer-column">
                 <h3>Información</h3>
                 <div class="info">
-                    <a href="Terminos.html">
+                    <a href="terminos.php">
                         <img src="../img/footer/terminos.png" alt="Términos y Condiciones">
                         Términos y Condiciones
                     </a>
