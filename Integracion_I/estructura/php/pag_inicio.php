@@ -81,9 +81,6 @@ $vehicle_result = $conexion->query($vehicle_query);
 <div class="acciones">
     <a href="registro_vehiculos.php" class="btn">Registrar Vehículo</a>
     <a href="gestion_espacios.php" class="btn">Gestionar Espacios</a>
-
-
-    
 </div>
 
 <footer>
