@@ -1,147 +1,106 @@
 <?php include('cabecera.php'); ?>
 
 <link rel="stylesheet" href="../css/registro_vehiculos.css">
-<link rel="stylesheet" href="../css/estilos_footer.css">
-<h2>Registro de Vehículos</h2>
-<form action="registro_vehiculos.php" method="POST">
-    <!-- Primera fila: Nombre y Apellido -->
-    <div class="form-row">
-        <div>
-            <label for="owner_first_name">Nombre del propietario:</label>
-            <input type="text" id="owner_first_name" name="owner_first_name" required>
-        </div>
-        <div>
-            <label for="owner_last_name">Apellido del propietario:</label>
-            <input type="text" id="owner_last_name" name="owner_last_name" required>
-        </div>
-    </div>
 
-    <!-- Segunda fila: Edad y Sexo -->
-    <div class="form-row">
-        <div>
-            <label for="owner_age">Edad del Propietario:</label>
-            <input type="number" id="owner_age" name="owner_age" required>
-        </div>
-        <div>
-            <label for="owner_sex">Sexo:</label>
-            <select id="owner_sex" name="owner_sex" required>
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
-            </select>
-        </div>
-    </div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Contenedor para el formulario -->
+        <div class="col-md-6">
+            <div class="dashboard-card">
+                <h2>Registro de Vehículos</h2>
+                <form action="registro_vehiculos.php" method="POST">
+                    <!-- Primera fila: Nombre y Apellido -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="owner_first_name">Nombre del propietario:</label>
+                            <input type="text" id="owner_first_name" name="owner_first_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="owner_last_name">Apellido del propietario:</label>
+                            <input type="text" id="owner_last_name" name="owner_last_name" class="form-control" required>
+                        </div>
+                    </div>
 
-    <!-- Tercera fila: Tipo de Usuario y Patente -->
-    <div class="form-row">
-        <div>
-            <label for="user_type">Tipo de Usuario:</label>
-            <select id="user_type" name="user_type" required>
-                <option value="profesor">Profesor</option>
-                <option value="alumno">Alumno</option>
-                <option value="visita">Visita</option>
-            </select>
-        </div>
-        <div>
-            <label for="vehicle_plate">Patente del Vehículo:</label>
-            <input type="text" id="vehicle_plate" name="vehicle_plate" required>
-        </div>
-    </div>
+                    <!-- Segunda fila: Edad y Sexo -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="owner_age">Edad del Propietario:</label>
+                            <input type="number" id="owner_age" name="owner_age" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="owner_sex">Sexo:</label>
+                            <select id="owner_sex" name="owner_sex" class="form-control" required>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                            </select>
+                        </div>
+                    </div>
 
-    <!-- Cuarta fila: Marca del Vehículo y Zona -->
-    <div class="form-row">
-        <div>
-            <label for="vehicle_brand">Marca del Vehículo:</label>
-            <select id="vehicle_brand" name="vehicle_brand" class="select-search" required>
-                <option value="">Selecciona una marca</option>
-            </select>
-        </div>
-        <div>
-            <label for="zone_filter">Selecciona la zona:</label>
-            <select id="zone_filter" name="zone_filter" required>
-                <option value="">Selecciona una zona</option>
-                <option value="Zona A">Zona A</option>
-                <option value="Zona B">Zona B</option>
-                <option value="Zona C">Zona C</option>
-                <option value="Zona D">Zona D</option>
-            </select>
-        </div>
-    </div>
+                    <!-- Tercera fila: Tipo de Usuario y Patente -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user_type">Tipo de Usuario:</label>
+                            <select id="user_type" name="user_type" class="form-control" required>
+                                <option value="profesor">Profesor</option>
+                                <option value="alumno">Alumno</option>
+                                <option value="visita">Visita</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicle_plate">Patente del Vehículo:</label>
+                            <input type="text" id="vehicle_plate" name="vehicle_plate" class="form-control" required>
+                        </div>
+                    </div>
 
-    <!-- Última fila: Espacio de Estacionamiento -->
-    <div class="form-row">
-        <div>
-            <label for="parking_space">Espacio de Estacionamiento:</label>
-            <select id="parking_space" name="parking_space" required>
-                <option value="">Selecciona un espacio</option>
-            </select>
-        </div>
-    </div>
+                    <!-- Cuarta fila: Marca del Vehículo y Zona -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vehicle_brand">Marca del Vehículo:</label>
+                            <select id="vehicle_brand" name="vehicle_brand" class="form-control select-search" required>
+                                <option value="">Selecciona una marca</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="zone_filter">Selecciona la zona:</label>
+                            <select id="zone_filter" name="zone_filter" class="form-control" required>
+                                <option value="">Selecciona una zona</option>
+                                <option value="Zona A">Zona A</option>
+                                <option value="Zona B">Zona B</option>
+                                <option value="Zona C">Zona C</option>
+                                <option value="Zona D">Zona D</option>
+                            </select>
+                        </div>
+                    </div>
 
-    <!-- Botón de envío -->
-    <div>
-        <input type="submit" value="Registrar Vehículo">
-    </div>
-</form>
+                    <!-- Última fila: Espacio de Estacionamiento -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="parking_space">Espacio de Estacionamiento:</label>
+                            <select id="parking_space" name="parking_space" class="form-control" required>
+                                <option value="">Selecciona un espacio</option>
+                            </select>
+                        </div>
+                    </div>
 
-<footer>
-        <!-- Primera Columna -->
-        <div class="footer">
-
-            <!-- Primera Columna -->
-            <div class="footer-column">
-                <h3>Redes Sociales</h3>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/uctemuco/"><img src="../img/footer/instagram.png" alt="Instagram"></a>
-                    <a href="https://www.facebook.com/canaluctemuco"><img src="../img/footer/facebook.png" alt="Facebook"></a>
-                    <a href="https://twitter.com/uctemuco"><img src="../img/footer/Twitter.png" alt="Twitter"></a>
-                    <a href="https://www.youtube.com/user/canaluctemuco"><img src="../img/footer/youtube.png" alt="Youtube"></a>
-                </div>
-            </div>
-
-            <!-- Segunda Columna -->
-            <div class="footer-column">
-                <h3>Contáctanos</h3>
-                <div class="contactos">
-                    <a href="mailto:info@uct.cl">
-                        <img src="../img/footer/correo.png" alt="Correo">
-                        info@uct.cl
-                    </a>
-                    <a href="https://maps.app.goo.gl/UpF5DKgBwauTYQys8">
-                        <img src="../img/footer/ubicacion.png" alt="Ubicación">
-                        Rudecindo Ortega 2959, Temuco
-                    </a>
-                </div>
-            </div>
-
-            <!-- Tercera Columna -->
-            <div class="footer-column">
-                <h3>Información</h3>
-                <div class="info">
-                    <a href="terminos.php">
-                        <img src="../img/footer/terminos.png" alt="Términos y Condiciones">
-                        Términos y Condiciones
-                    </a>
-                    <a href="https://www.uct.cl/">
-                        <img src="../img/footer/oficial.png" alt="Página oficial UCT">
-                        Página oficial UCT
-                    </a>
-                </div>
-            </div>
-
-            <!-- Columna Imagen -->
-            <div class="footer-column">
-                <div class="ing-logo">
-
-                    <img src="../img/footer/uct_inf.png" alt="inf">
-                </div> 
+                    <!-- Botón de envío -->
+                    <div class="form-group text-center">
+                        <input type="submit" value="Registrar Vehículo" class="btn btn-primary">
+                    </div>
+                </form>
             </div>
         </div>
 
-        <!-- Parte de abajo -->
-        <div class="derechos-reservados">
-            &copy; 2024 Universidad Católica de Temuco. Todos los derechos reservados.
+        <!-- Contenedor para la imagen del mapa -->
+        <div class="col-md-6">
+            <div class="dashboard-card">
+                <h2>Mapa del Estacionamiento</h2>
+                <img src="../img/mapa.png" alt="Mapa de Estacionamiento" class="img-fluid">
+            </div>
         </div>
-    </footer>
+    </div>
+</div>
+
+<?php include('pie.php'); ?>
 
 <script>
 // Cargar marcas dinámicamente al cargar la página
@@ -216,8 +175,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
-
 
 
 <?php
