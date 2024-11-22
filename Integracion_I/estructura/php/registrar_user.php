@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Registro exitoso";
-        echo "<script>alert('Registro exitoso'); window.location.href = '../inicio.php';</script>";
+        echo "<script>alert('Registro exitoso'); window.location.href = 'inicio.php';</script>";
         exit();
     } else {
         echo "Error al registrar";
