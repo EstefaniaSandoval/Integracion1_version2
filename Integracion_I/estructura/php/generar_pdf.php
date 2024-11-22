@@ -2,53 +2,91 @@
 require('../fpdf186/fpdf.php');
 require('conex.php');
 
+// Obtener parámetros de filtro
+$filtro = isset($_GET['filtro']) ? $_GET['filtro'] : null;
+$valor = isset($_GET['valor']) ? $_GET['valor'] : null;
 
-// Paginación
-$limit = 10; // Número de registros por página
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-$offset = ($page - 1) * $limit;
-
-// Consulta de los registros a mostrar en la página activa
+// Construir la consulta SQL con filtro
 $query = "SELECT nombre, apellido, edad, sexo, tipo_usuario, patente, marca, espacio_estacionamiento 
-          FROM vehiculos_registrados 
-          LIMIT $limit OFFSET $offset";
-$result = $conexion->query($query);
+          FROM vehiculos_registrados";
 
-// Crear instancia de FPDF
-$pdf = new FPDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 12);
-
-// Título del documento
-$pdf->Cell(0, 10, 'Registros de Vehiculos - Pagina ' . $page, 0, 1, 'C');
-
-// Cabecera de la tabla
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(25, 10, 'Nombre', 1);
-$pdf->Cell(25, 10, 'Apellido', 1);
-$pdf->Cell(20, 10, 'Edad', 1);
-$pdf->Cell(20, 10, 'Sexo', 1);
-$pdf->Cell(30, 10, 'Tipo de Usuario', 1);
-$pdf->Cell(30, 10, 'Patente', 1);
-$pdf->Cell(30, 10, 'Marca', 1);
-$pdf->Cell(30, 10, 'Espacio Est.', 1);
-$pdf->Ln();
-
-// Agregar datos de la tabla
-$pdf->SetFont('Arial', '', 10);
-while ($row = $result->fetch_assoc()) {
-    $pdf->Cell(25, 10, $row['nombre'], 1);
-    $pdf->Cell(25, 10, $row['apellido'], 1);
-    $pdf->Cell(20, 10, $row['edad'], 1);
-    $pdf->Cell(20, 10, $row['sexo'], 1);
-    $pdf->Cell(30, 10, $row['tipo_usuario'], 1);
-    $pdf->Cell(30, 10, $row['patente'], 1);
-    $pdf->Cell(30, 10, $row['marca'], 1);
-    $pdf->Cell(30, 10, $row['espacio_estacionamiento'], 1);
-    $pdf->Ln();
+if ($filtro && $valor) {
+    $query .= " WHERE $filtro LIKE ?";
 }
 
-// Generar el archivo PDF
-$pdf->Output('D', 'Registro de vehiculos.pdf');
+$stmt = $conexion->prepare($query);
 
+if ($filtro && $valor) {
+    $valor = "%$valor%"; // Usar comodines para búsqueda parcial
+    $stmt->bind_param("s", $valor);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Clase personalizada para encabezado y pie de página
+class PDF extends FPDF
+{
+    function Header()
+    {
+        $this->Image('../img/images.png', 10, 8, 30);
+        $this->Ln(10);
+        $this->SetFont('Arial', 'B', 16);
+        $this->Cell(0, 10, 'Universidad Catolica de Temuco', 0, 1, 'C');
+        $this->SetFont('Arial', 'I', 12);
+        $this->Cell(0, 10, 'San Juan Pablo II', 0, 1, 'C');
+        $this->Ln(10);
+        $this->SetFont('Arial', 'B', 14);
+        $this->Cell(0, 10, 'Registro de Vehiculos', 0, 1, 'C');
+        $this->Ln(5);
+    }
+
+    function Footer()
+    {
+        $this->SetY(-25);
+        $this->SetFont('Arial', 'I', 8);
+        $this->SetTextColor(100, 100, 100);
+        $fecha = date('d/m/Y');
+        $this->Cell(0, 10, 'Fecha de descarga: ' . $fecha, 0, 0, 'C');
+        $this->Ln(5);
+        $this->SetY(-15);
+        $this->Cell(0, 10, 'Pagina ' . $this->PageNo(), 0, 0, 'C');
+    }
+}
+
+$pdf = new PDF();
+$pdf->SetMargins(10, 10, 10);
+$pdf->AddPage();
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFillColor(200, 220, 255);
+
+$header = ['Nombre', 'Apellido', 'Edad', 'Sexo', 'Tipo Usuario', 'Patente', 'Marca', 'Espacio Est.'];
+$widths = [25, 25, 25, 25, 25, 25, 25, 25];
+$xOffset = 5;
+
+$pdf->SetX($xOffset);
+foreach ($header as $i => $col) {
+    $pdf->Cell($widths[$i], 10, $col, 1, 0, 'C', true);
+}
+$pdf->Ln();
+
+$pdf->SetFont('Arial', '', 10);
+$pdf->SetFillColor(245, 245, 245);
+$fill = false;
+
+while ($row = $result->fetch_assoc()) {
+    $pdf->SetX($xOffset);
+    $pdf->Cell($widths[0], 8, $row['nombre'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[1], 8, $row['apellido'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[2], 8, $row['edad'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[3], 8, $row['sexo'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[4], 8, $row['tipo_usuario'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[5], 8, $row['patente'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[6], 8, $row['marca'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[7], 8, $row['espacio_estacionamiento'], 1, 0, 'C', $fill);
+    $pdf->Ln();
+    $fill = !$fill;
+}
+
+$pdf->Output('D', 'Registro de vehiculos.pdf');
 ?>
