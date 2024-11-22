@@ -26,9 +26,10 @@
 <body style="background-color: #e9f7fd;">
     <header class="bg-primary py-3">
         <nav class="navbar navbar-expand-lg navbar-dark container">
-            <a class="navbar-brand" href="#">
-                <img src="../img/logo.png" alt="Logo Universidad" width="170" height="60"> <!-- Logo de la universidad -->
+            <a class="navbar-brand logo-left" href="#">
+                <img src="../img/logo.png" alt="Logo Universidad" width="170" height="60">
             </a>
+
 
             <!-- Título centrado entre el logo y el menú -->
             <div class="navbar-title" style="margin-left: 20px; flex-grow: 1; text-align: center;">

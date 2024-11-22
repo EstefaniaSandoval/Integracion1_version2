@@ -17,9 +17,12 @@ body {
     padding: 40px;
 }
 
+/*
 .intro h3, .intro p, .cta, .btn, table, th, td, form, .modal, .modal-content, header, nav, .acciones {
-    /* Añade estilos similares a los proporcionados anteriormente */
+    /* Añade estilos similares a los proporcionados anteriormente 
 }
+*/
+
 
 /* Contenedor para los gráficos */
 .chart-wrapper {
@@ -322,7 +325,7 @@ nav ul li a {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 160px;    margin-top: 20px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -348,3 +351,21 @@ nav ul li a {
     gap: 10px;
     margin-top: 20px;
 }
+
+.text-center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.acciones {
+    margin-bottom: 40px; 
+}
+
+table {
+    width: calc(100% - 40px); /* Ajusta el ancho para considerar los márgenes */
+    border-collapse: collapse;
+    margin: 20px 20px 20px 20px; /* Añade margen a todos los lados */
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
