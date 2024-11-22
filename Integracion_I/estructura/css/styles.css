@@ -94,22 +94,37 @@ tr:hover {
     cursor: pointer;
 }
 
-/* Estilo para botones dentro de las tablas */
-.btn {
-    padding: 10px;
-    background-color: burlywood;
-    color: black;
+.acciones .btn {
+    background-color: #007bff; /* Azul claro */
     border: none;
-    border-radius: 12px;
+    padding: 1rem;
+    font-size: 1rem;
+    width: 10em;
+    border-radius: 1rem;
+    color: white;
+    box-shadow: 0 0.4rem rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    text-align: center; /* Asegura que el texto esté centrado */
+    display: inline-block; /* Asegura que los enlaces se comporten como botones */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
 }
 
-.btn:hover {
-    background-color: darkgrey;
+.acciones .btn:active {
+    color: white;
+    box-shadow: 0 0.2rem rgba(0, 0, 0, 0.1);
+    transform: translateY(0.2rem);
 }
 
-.btn:active {
-    background-color: antiquewhite;
+.acciones .btn:hover:not(:disabled) {
+    background-color: #0056b3; /* Azul más oscuro */
+    color: white;
+    text-shadow: 0 0.1rem rgba(0, 0, 0, 0.1);
+}
+
+.acciones .btn:disabled {
+    cursor: auto;
+    background-color: #cccccc; /* Gris claro */
+    color: grey;
 }
 
 /* Botones adicionales */
