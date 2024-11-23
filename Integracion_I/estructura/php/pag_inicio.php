@@ -119,10 +119,9 @@
 
 
 
-    <!-- Botones de acción -->
+    <!-- Botón de acción -->
     <div class="actions">
         <a href="registro_vehiculos.php" class="btn btn-primary">Registrar Vehículo</a>
-        <a href="gestion_espacios.php" class="btn btn-primary">Gestionar Espacios</a>
     </div>
 
     

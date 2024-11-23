@@ -14,6 +14,7 @@
             <option value="apellido">Apellido</option>
             <option value="patente">Patente</option>
             <option value="espacio_estacionamiento">Espacio de Estacionamiento</option>
+            <option value="quitar_filtros">Quitar Filtros</option>
         </select>
         <div id="filtro-opciones" class="mt-3"></div> <!-- Aquí se generarán dinámicamente las opciones -->
     </div>
@@ -115,9 +116,22 @@
         opcionesDiv.innerHTML = ''; // Limpia las opciones previas
 
         if (filtro) {
+            // Si selecciona "Quitar Filtros"
+            if (filtro === 'quitar_filtros') {
+                opcionesDiv.innerHTML = `
+                    <button id="aplicar-filtro" class="btn btn-primary mt-2">Quitar Filtros</button>`;
+                
+                document.getElementById('aplicar-filtro').addEventListener('click', function () {
+                    // Redirigir a la página original sin filtros
+                    window.location.href = 'ver_registros_vehiculos.php';
+                });
+
+                return; // Salir del resto del código
+            }
+            
             let campo = '';
             // Genera el campo de entrada según el filtro seleccionado
-            if (['nombre', 'apellido', 'patente', 'marca'].includes(filtro)) {
+            if (['nombre', 'apellido', 'patente'].includes(filtro)) {
                 campo = `<input type="text" id="filtro-valor" class="form-control" placeholder="Ingrese ${filtro}">`;
         
             } else if (filtro === 'espacio_estacionamiento') {

@@ -7,7 +7,7 @@ $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : null;
 $valor = isset($_GET['valor']) ? $_GET['valor'] : null;
 
 // Construir la consulta SQL con filtro
-$query = "SELECT nombre, apellido, edad, sexo, tipo_usuario, patente, marca, espacio_estacionamiento 
+$query = "SELECT nombre, apellido, patente, espacio_estacionamiento 
           FROM INFO1170_VehiculosRegistrados";
 
 if ($filtro && $valor) {
@@ -60,9 +60,11 @@ $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetFillColor(200, 220, 255);
 
-$header = ['Nombre', 'Apellido', 'Edad', 'Sexo', 'Tipo Usuario', 'Patente', 'Marca', 'Espacio Est.'];
-$widths = [25, 25, 25, 25, 25, 25, 25, 25];
-$xOffset = 5;
+$header = ['Nombre', 'Apellido', 'Patente', 'Espacio Est.'];
+$widths = [35, 35, 35, 35]; // Ajusta los anchos si es necesario
+$totalWidth = array_sum($widths); // Calcula el ancho total de la tabla
+$pageWidth = $pdf->GetPageWidth(); // Ancho de la página
+$xOffset = ($pageWidth - $totalWidth) / 2; // Calcula el margen izquierdo
 
 $pdf->SetX($xOffset);
 foreach ($header as $i => $col) {
@@ -78,12 +80,8 @@ while ($row = $result->fetch_assoc()) {
     $pdf->SetX($xOffset);
     $pdf->Cell($widths[0], 8, $row['nombre'], 1, 0, 'C', $fill);
     $pdf->Cell($widths[1], 8, $row['apellido'], 1, 0, 'C', $fill);
-    $pdf->Cell($widths[2], 8, $row['edad'], 1, 0, 'C', $fill);
-    $pdf->Cell($widths[3], 8, $row['sexo'], 1, 0, 'C', $fill);
-    $pdf->Cell($widths[4], 8, $row['tipo_usuario'], 1, 0, 'C', $fill);
-    $pdf->Cell($widths[5], 8, $row['patente'], 1, 0, 'C', $fill);
-    $pdf->Cell($widths[6], 8, $row['marca'], 1, 0, 'C', $fill);
-    $pdf->Cell($widths[7], 8, $row['espacio_estacionamiento'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[2], 8, $row['patente'], 1, 0, 'C', $fill);
+    $pdf->Cell($widths[3], 8, $row['espacio_estacionamiento'], 1, 0, 'C', $fill);
     $pdf->Ln();
     $fill = !$fill;
 }
