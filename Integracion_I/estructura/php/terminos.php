@@ -59,4 +59,7 @@
         <!-- Contenido de la página -->
     </div>
 </body>
+
+<?php include('pie.php'); ?>
+
 </html>
