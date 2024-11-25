@@ -82,6 +82,11 @@
                     <i class="fas fa-chart-bar menu-icon"></i> Estadísticas
                 </a>
             </li>
+            <li>
+                <a href="../inicio.php">
+                    <i class="fas fa-sign-out-alt menu-icon"></i> Cerrar Sesión
+                </a>
+            </li>
         </ul>
     </div>
 
