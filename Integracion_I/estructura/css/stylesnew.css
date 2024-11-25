@@ -1,7 +1,7 @@
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f8fa;
+    background-color: #f4f4f4;
     color: #333;
     margin: 0;
     padding: 0;
@@ -190,7 +190,7 @@ body {
 .main-content {
     margin-left: 250px; /* Same width as the sidebar */
     padding: 20px;
-    background-color: #f7f8fa;
+    background: linear-gradient(to bottom, #93ceef, #c8d5e2);
     min-height: 100vh;
 }
 
