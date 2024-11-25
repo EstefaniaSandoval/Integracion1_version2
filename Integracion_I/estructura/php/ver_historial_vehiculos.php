@@ -1,4 +1,4 @@
-<?php include('cabecera.php'); ?>
+<?php include('cabecera.php'); ?> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../css/estilos_footer.css">
 <h2 class="text-center my-4">Historial de Vehículos</h2>
@@ -22,13 +22,26 @@
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
             $offset = ($page - 1) * $limit;
 
-            $query = "SELECT vehiculo_id, patente, espacio_estacionamiento, accion, fecha FROM INFO1170_HistorialRegistros LIMIT $limit OFFSET $offset";
+            // Consulta con JOIN entre HistorialRegistros y VehiculosRegistrados
+            $query = "SELECT 
+                            hr.IdVehiculo, 
+                            vr.patente, 
+                            vr.espacio_estacionamiento, 
+                            hr.fecha, 
+                            hr.accion 
+                      FROM 
+                            INFO1170_HistorialRegistros hr
+                      JOIN 
+                            INFO1170_VehiculosRegistrados vr ON hr.IdVehiculo = vr.id
+                      LIMIT $limit OFFSET $offset";
+
+            // Ejecutar la consulta
             $result = $conexion->query($query);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>
-                            <td>{$row['vehiculo_id']}</td>
+                            <td>{$row['IdVehiculo']}</td>
                             <td>{$row['patente']}</td>
                             <td>{$row['espacio_estacionamiento']}</td>
                             <td>{$row['accion']}</td>

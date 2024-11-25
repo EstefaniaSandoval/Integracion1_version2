@@ -1,5 +1,5 @@
-<?php include('cabecera.php'); ?>
-
+<?php include('cabecera.php'); 
+?>
 <link rel="stylesheet" href="../css/registro_vehiculos.css">
 
 <div class="container-fluid">
@@ -167,10 +167,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Obtener el ID del vehículo insertado
         $vehiculo_id = $conexion->insert_id;
 
-        $query_historial = "INSERT INTO INFO1170_HistorialRegistros (vehiculo_id, patente, espacio_estacionamiento, accion) 
-        VALUES (?, ?, ?, 'Entrada')";
+        $query_historial = "INSERT INTO INFO1170_HistorialRegistros (idVehiculo, fecha, accion) 
+        VALUES (?, NOW(), 'Entrada')";
         $stmt_historial = $conexion->prepare($query_historial);
-        $stmt_historial->bind_param("iss", $vehiculo_id, $vehicle_plate, $parking_space);
+        $stmt_historial->bind_param("i", $vehiculo_id);
 
         if (!$stmt_historial->execute()) {
         die("<p style='color:red;'>Error al insertar en el historial: " . $stmt_historial->error . "</p>");

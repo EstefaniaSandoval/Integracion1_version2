@@ -1,4 +1,5 @@
-<?php include('cabecera.php'); ?>
+<?php include('cabecera.php');
+?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../css/estilos_footer.css">
 
@@ -74,7 +75,7 @@
                         <td>
                             <a class='btn btn-primary btn-sm' href='editar_vehiculo.php?id={$row['id']}'>Editar</a>
                             <a class='btn btn-danger btn-sm' href='eliminar_registro.php?id={$row['id']}'>Eliminar</a>
-                            <a class='btn btn-success btn-sm' href='ver_registros_vehiculos.php?exit_id={$row['id']}'>Salida</a>
+                            <a class='btn btn-success btn-sm' href='salida_vehiculos.php?exit_id={$row['id']}'>Salida</a>
                         </td>
                     </tr>";
             }
