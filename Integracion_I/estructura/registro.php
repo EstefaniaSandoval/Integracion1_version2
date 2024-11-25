@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Registro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iniciar Sesión</title>
-  <link rel="stylesheet" href="./css/estilo_inicio.css">
+  <link rel="stylesheet" href="../estructura/css/registro.css">
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js' type="module"></script>
   <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js' type="module"></script>
 </head>
@@ -15,29 +15,26 @@
   <section>
     <div class="form-box">
       <div class="form-value">
-        <form method="POST" id="loginForm"> <!-- Eliminé el atributo action -->
-          <h2>Inicio Sesión</h2>
+        <form method="POST" id="registerForm"> <!-- Eliminé el atributo action -->
+          <h2>Regístrate</h2>
+          <div class="inputbox">
+              <ion-icon name="person-outline"></ion-icon>
+              <input type="text" name="username" required>
+              <label for="">Nombre Usuario</label>
+          </div>
           <div class="inputbox">
             <ion-icon name="mail-outline"></ion-icon>
-            <input type="text" name="username" required>
-            <label for="">Nombre Usuario</label>
+            <input type="email" name="email" required>
+            <label for="">Correo</label>
           </div>
           <div class="inputbox">
             <ion-icon name="lock-closed-outline"></ion-icon>
             <input type="password" name="password" required>
             <label for="">Contraseña</label>
           </div>
-          <div class="forget">
-            <label>
-              <input type="checkbox"> Recuérdame
-            </label>
-            <label>
-              <a href="./php/recuperar_contraseña.php">¿Olvidaste tu contraseña?</a>
-            </label>
-          </div>
-          <button id="loginBtn" type="submit">Iniciar Sesión</button>
+          <button id="registerBtn" type="submit">Registrarse</button>
           <div class="register">
-            <p>¿No tienes una cuenta? <a href="../estructura/registro.php">Regístrate por aquí</a></p>
+            <p>¿Ya tienes una cuenta? <a href="../estructura/inicio.php">Inicia Sesión aquí</a></p>
           </div>
         </form>
       </div>

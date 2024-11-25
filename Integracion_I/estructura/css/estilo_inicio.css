@@ -4,30 +4,40 @@
     font-family: "Poppins", sans-serif;
   }
   
+  header {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    height: 100px; /* Ajusta la altura de la cabecera */
+    background-color: #0f7be6; /* Color de fondo de la cabecera */
+  }
+  
+  header img {
+    max-height: 80px; /* Ajusta el tamaño del logo */
+  }
+
   section {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Alinea el contenido al inicio (izquierda) */
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background: url("../img/uct.jpg");
-    background-position: center;
-    background-size: cover;
+    background: linear-gradient(to bottom, #086fd5, #93ceef);
   }
-  
+
   .form-box {
     position: relative;
     width: 400px;
     height: 450px;
     background: transparent;
-    border: 2px solid rgb(0, 98, 255);
+    border: 2px solid rgb(235, 235, 235);
     border-radius: 20px;
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
+
   h2 {
     font-size: 2em;
     color: #000000;
@@ -142,4 +152,3 @@
   .register p a:hover {
     text-decoration: underline;
   }
-  
