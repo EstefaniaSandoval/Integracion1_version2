@@ -117,20 +117,14 @@
         </div>
     </div>
 
-    <!-- Botones de acción -->
+
+
+    <!-- Botón de acción -->
     <div class="actions">
         <a href="registro_vehiculos.php" class="btn btn-primary">Registrar Vehículo</a>
-        <a href="gestion_espacios.php" class="btn btn-primary">Gestionar Espacios</a>
     </div>
 
-    <!-- Pie de página -->
-    <footer class="main-footer">
-        <p>&copy; 2024 Universidad Católica de Temuco. Todos los derechos reservados.</p>
-        <p>
-            <a href="https://www.uct.cl" target="_blank">Página oficial UCT</a> |
-            <a href="mailto:contacto@uct.cl">Contáctanos Aquí</a>
-        </p>
-    </footer>
+    
 
     <!-- Script para el gráfico -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -171,6 +165,10 @@
             }
         });
     </script>
+
+    <?php include('pie.php'); ?>
 </body>
 </html>
+
+
 <?php $conexion->close(); ?>

@@ -60,7 +60,7 @@
     </div>
 </div>
 
-<?php include('pie.php'); ?>
+
 
 <script>
 // Cargar marcas dinámicamente al cargar la página
