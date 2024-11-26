@@ -21,9 +21,17 @@ $data_estacionamiento = $result_estacionamiento->fetch_assoc();
 // Historial de registros
 $query_historial = "
     SELECT 
-        id, vehiculo_id, patente, espacio_estacionamiento, fecha, accion 
-    FROM INFO1170_HistorialRegistros 
-    ORDER BY fecha DESC 
+        hr.IdVehiculo, 
+        vr.patente, 
+        vr.espacio_estacionamiento, 
+        hr.fecha, 
+        hr.accion
+    FROM 
+        INFO1170_HistorialRegistros hr
+    JOIN 
+        INFO1170_VehiculosRegistrados vr ON hr.IdVehiculo = vr.id
+    ORDER BY 
+        hr.fecha DESC
     LIMIT 10";
 $result_historial = $conexion->query($query_historial);
 

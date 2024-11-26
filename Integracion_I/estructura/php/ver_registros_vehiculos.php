@@ -46,7 +46,7 @@
 
         // Construir la consulta SQL
         $query = "SELECT id, nombre, apellido, patente, espacio_estacionamiento 
-                FROM INFO1170_VehiculosRegistrados";
+                FROM INFO1170_VehiculosRegistrados ORDER BY id DESC";
 
         // Si hay un filtro, agrega una condición WHERE
         if ($filtro && $valor) {
@@ -74,7 +74,7 @@
                         <td>{$row['espacio_estacionamiento']}</td>
                         <td>
                             <a class='btn btn-primary btn-sm' href='editar_vehiculo.php?id={$row['id']}'>Editar</a>
-                            <a class='btn btn-danger btn-sm' href='eliminar_registro.php?id={$row['id']}'>Eliminar</a>
+                            <a class='btn btn-danger btn-sm' href='eliminar_vehiculo.php?id={$row['id']}'>Eliminar</a>
                             <a class='btn btn-success btn-sm' href='salida_vehiculos.php?exit_id={$row['id']}'>Salida</a>
                         </td>
                     </tr>";
@@ -109,6 +109,42 @@
         ?>
     </div>
 </div>
+
+<!-- Cuadro de confirmación de eliminación -->
+<div id="confirm-delete" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h4>¿Estás seguro de que deseas eliminar este registro?</h4>
+        <p>Esta acción no se puede deshacer.</p>
+        <button id="confirm-yes" style="background-color: #d9534f; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px;">
+            Aceptar
+        </button>
+        <button id="confirm-no" style="background-color: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px;">
+            Cancelar
+        </button>
+    </div>
+</div>
+
+<!-- Estilos para el modal -->
+<style>
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+</style>
+
 
 <script>
     document.getElementById('filtro-principal').addEventListener('change', function () {
@@ -156,6 +192,40 @@
             });
         }
     });
+
+    document.querySelectorAll('.btn-danger').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevenir que el enlace se ejecute inmediatamente
+
+            // Mostrar el cuadro de confirmación
+            document.getElementById('confirm-delete').style.display = 'flex';
+
+            const deleteUrl = this.href; // Guardar la URL del enlace de eliminación
+
+            // Si el usuario acepta, redirigimos al enlace de eliminación
+            document.getElementById('confirm-yes').onclick = function() {
+                window.location.href = deleteUrl;
+            };
+
+            // Si el usuario cancela, ocultamos el cuadro de confirmación
+            document.getElementById('confirm-no').onclick = function() {
+                document.getElementById('confirm-delete').style.display = 'none';
+            };
+        });
+    });
+
+    // Verifica si hay un mensaje de éxito en la URL
+    window.onload = function() {
+        const mensaje = "<?php echo isset($_GET['mensaje']) ? $_GET['mensaje'] : ''; ?>";
+        if (mensaje) {
+            setTimeout(function() {
+                const alertElement = document.querySelector('.alert');
+                if (alertElement) {
+                    alertElement.style.display = 'none'; // Ocultar el mensaje
+                }
+            }, 2000); // 2000 milisegundos = 2 segundos
+        }
+    };
 </script>
 
 <?php include('pie.php'); ?>

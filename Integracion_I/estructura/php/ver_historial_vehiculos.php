@@ -33,6 +33,7 @@
                             INFO1170_HistorialRegistros hr
                       JOIN 
                             INFO1170_VehiculosRegistrados vr ON hr.IdVehiculo = vr.id
+                            ORDER BY hr.fecha DESC
                       LIMIT $limit OFFSET $offset";
 
             // Ejecutar la consulta
