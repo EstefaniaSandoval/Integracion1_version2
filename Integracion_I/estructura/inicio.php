@@ -32,7 +32,7 @@
               <input type="checkbox"> Recuérdame
             </label>
             <label>
-              <a href="./php/recuperar_contraseña.php">¿Olvidaste tu contraseña?</a>
+              <a href="../estructura/recuperar_contraseña.php">¿Olvidaste tu contraseña?</a>
             </label>
           </div>
           <button id="loginBtn" type="submit">Iniciar Sesión</button>
