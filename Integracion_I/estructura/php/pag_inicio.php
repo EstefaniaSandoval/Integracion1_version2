@@ -126,7 +126,7 @@
 
             <!-- Gráfico -->
             <div class="dashboard-card">
-                <h2>Gráfico de Movimientos</h2>
+                <h2>Gráfico de Movimientos Diarios</h2>
                 <canvas id="graficoBarras"></canvas>
             </div>
         </div>
@@ -168,43 +168,48 @@
 
     <!-- Script para el gráfico -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('graficoBarras').getContext('2d');
-        const data = <?= json_encode($grafico_datos) ?>;
-        const labels = data.map(item => item.fecha);
-        const entradas = data.map(item => item.entradas);
-        const salidas = data.map(item => item.salidas);
+<script>
+    const ctx = document.getElementById('graficoBarras').getContext('2d');
+    const data = <?= json_encode($grafico_datos) ?>;
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Entradas',
-                        data: entradas,
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Salidas',
-                        data: salidas,
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: { title: { display: true, text: 'Fecha' } },
-                    y: { title: { display: true, text: 'Cantidad' } }
+    // Filtrar los datos para incluir solo la información del día actual
+    const today = new Date().toISOString().split('T')[0];
+    const todayData = data.filter(item => item.fecha === today);
+
+    const labels = todayData.map(item => item.fecha);
+    const entradas = todayData.map(item => item.entradas);
+    const salidas = todayData.map(item => item.salidas);
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Entradas',
+                    data: entradas,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Salidas',
+                    data: salidas,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
                 }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: { title: { display: true, text: 'Fecha' } },
+                y: { title: { display: true, text: 'Cantidad' } }
             }
-        });
-    </script>
+        }
+    });
+</script>
 
     <?php include('pie.php'); ?>
 </body>
