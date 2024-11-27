@@ -98,7 +98,7 @@
         <div class="dashboard">
             <!-- Contenedor combinado para "Máximo de Ocupación Diaria" y "Promedio Diario de Movimientos" -->
             <div class="dashboard-card">
-                                <div class="stat-card">
+                <div class="stat-card">
                     <div class="stat-content">
                         <div>Máximo de Ocupación Diaria</div>
                         <div class="value"><?= $max_ocupacion['ocupacion'] ?> vehículos</div>
@@ -126,10 +126,9 @@
                 <canvas id="graficoActividadSemanal"></canvas>
             </div>
         </div>
+    </div> <!-- Cerramos el contenedor principal -->
 
-        <div class="table-card">
-
-    <!-- Script para los gráficos -->
+        <!-- Script para los gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Gráfico de los días de mayor actividad (por día de la semana)
@@ -202,9 +201,7 @@
         });
 
     </script>
-<div class="table-card">
-</div>
 
-    <?php include('pie.php'); ?>
+    <?php include('pie.php'); ?> <!-- Pie de página fuera del contenedor principal -->
 </body>
 </html>
