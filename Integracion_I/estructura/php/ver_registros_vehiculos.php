@@ -46,7 +46,7 @@
 
         // Construir la consulta SQL
         $query = "SELECT id, nombre, apellido, patente, espacio_estacionamiento 
-                FROM INFO1170_VehiculosRegistrados ORDER BY id DESC";
+                FROM INFO1170_VehiculosRegistrados";
 
         // Si hay un filtro, agrega una condición WHERE
         if ($filtro && $valor) {

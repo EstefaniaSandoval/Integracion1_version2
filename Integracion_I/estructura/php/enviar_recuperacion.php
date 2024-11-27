@@ -18,7 +18,7 @@ if ($query->num_rows > 0) {
     $expira = date("Y-m-d H:i:s", strtotime("+1 hour"));
 
     // Guardar el token en la base de datos
-    $insert = $mysqli->prepare("INSERT INTO recuperacion_password (user_id, token, expira) VALUES (?, ?, ?)");
+    $insert = $mysqli->prepare("INSERT INTO INFO1170_RecuperacionPassword (user_id, token, expira) VALUES (?, ?, ?)");
     $insert->bind_param("iss", $user_id, $token, $expira);
     $insert->execute();
 
