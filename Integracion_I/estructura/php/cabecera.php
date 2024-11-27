@@ -83,6 +83,11 @@
                 </a>
             </li>
             <li>
+                <a href="reservas.php">
+                    <i class="fas fa-calendar-check menu-icon"></i> Reservas
+                </a>
+            </li>
+            <li>
                 <a href="../inicio.php">
                     <i class="fas fa-sign-out-alt menu-icon"></i> Cerrar Sesión
                 </a>
